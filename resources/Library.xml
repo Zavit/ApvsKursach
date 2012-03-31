@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Library>
+	<logics>
+		<!-- AND -->
+		<conjunction>
+			<delay value="15" />
+			<cinput value="2">
+				<signals>
+					<entry key="5" value="1" />
+				</signals>
+			</cinput>
+			<cinput value="3">
+				<signals>
+					<entry key="21" value="1" />
+				</signals>
+			</cinput>
+			<cinput value="4">
+				<signals>
+					<entry key="85" value="1" />
+				</signals>
+			</cinput>
+			<cinput value="8">
+				<signals>
+					<entry key="21845" value="1" />
+				</signals>
+			</cinput>
+		</conjunction>
+		<!-- AND NOT -->
+		<conjuntion_inversion>
+			<delay value="15" />
+			<cinput value="2">
+				<signals>
+					<entry key="5" value="0" />
+				</signals>
+			</cinput>
+			<cinput value="3">
+				<signals>
+					<entry key="21" value="0" />
+				</signals>
+			</cinput>
+			<cinput value="4">
+				<signals>
+					<entry key="85" value="0" />
+				</signals>
+			</cinput>
+			<cinput value="8">
+				<signals>
+					<entry key="21845" value="0" />
+				</signals>
+			</cinput>
+		</conjuntion_inversion>
+		<!-- OR -->
+		<disjunction>
+			<delay value="22" />
+			<cinput value="2">
+				<signals>
+					<entry key="0" value="0" />
+				</signals>
+			</cinput>
+			<cinput value="3">
+				<signals>
+					<entry key="0" value="0" />
+				</signals>
+			</cinput>
+			<cinput value="4">
+				<signals>
+					<entry key="0" value="0" />
+				</signals>
+			</cinput>
+			<cinput value="8">
+				<signals>
+					<entry key="0" value="0" />
+				</signals>
+			</cinput>
+		</disjunction>
+		<!-- OR NOT -->
+		<disjunction_inversion>
+			<delay value="22" />
+			<cinput value="2">
+				<signals>
+					<entry key="0" value="1" />
+				</signals>
+			</cinput>
+			<cinput value="3">
+				<signals>
+					<entry key="0" value="1" />
+				</signals>
+			</cinput>
+			<cinput value="4">
+				<signals>
+					<entry key="0" value="1" />
+				</signals>
+			</cinput>
+			<cinput value="8">
+				<signals>
+					<entry key="0" value="1" />
+				</signals>
+			</cinput>
+		</disjunction_inversion>
+	</logics>
+<!--  DECODERS -->
+	<decoders>
+		<delay value="15" />
+		<decoder controlInput="3" infoInput="3" output="8" type="KP531ID7">
+			<signals>
+				<entry key="682" value="21845" />
+				<entry key="2474" value="21845" />
+				<entry key="2666" value="21845" />
+				<entry key="1024" value="5461" />
+				<entry key="1040" value="17749" />
+				<entry key="1024" value="20821" />
+				<entry key="1044" value="21589" />
+				<entry key="1025" value="21781" />
+				<entry key="1041" value="21829" />
+				<entry key="1029" value="21841" />
+				<entry key="1045" value="21844" />
+			</signals>
+		</decoder>
+		<decoder controlInput="1" infoInput="2" output="4" type="K531ID4">
+			<signals>
+				<entry key="31" value="85" />
+				<entry key="0" value="21" />
+				<entry key="1" value="69" />
+				<entry key="4" value="81" />
+				<entry key="5" value="84" />
+			</signals>
+		</decoder>
+		<decoder controlInput="2" infoInput="4" output="16" type="K155ID3">
+			<signals>
+				<entry key="1706" value="1431655765" />
+				<entry key="2474" value="1431655765" />
+				<entry key="0" value="357913941" />
+				<entry key="1" value="1163220309" />
+				<entry key="4" value="1364546901" />
+				<entry key="5" value="1414878549" />
+				<entry key="16" value="1427461461" />
+				<entry key="17" value="1430607189" />
+				<entry key="20" value="1431393621" />
+				<entry key="21" value="1431590229" />
+				<entry key="64" value="1431639381" />
+				<entry key="65" value="1431651669" />
+				<entry key="68" value="1431654741" />
+				<entry key="69" value="1431655509" />
+				<entry key="80" value="1431655701" />
+				<entry key="81" value="1431655749" />
+				<entry key="84" value="1431655761" />
+				<entry key="85" value="1431655764" />
+			</signals>
+		</decoder>
+	</decoders>
+	<!--  CODERS -->
+	<coders>
+		<coder input ="9" output = "5" type="K155IV1">
+			<signals>
+				<entry key="109226" value="341" />
+				<entry key="21845" value="340" />
+				<entry key="174752" value="1" />
+				<entry key="174724" value="5" />
+				<entry key="174612" value="17" />
+				<entry key="174164" value="21" />
+				<entry key="172372" value="65" />
+				<entry key="165204" value="69" />
+				<entry key="136532" value="81" />
+				<entry key="21844" value="85" />
+			</signals>
+		</coder>
+	</coders>
+<!--  TRIGGERS -->
+	<triggers>
+		<cinput value="2" type="RS">
+			<coutput value="2" />
+			<signals>
+
+			</signals>
+		</cinput>
+		<cinput value="3" type="JK">
+			<coutput value="2" />
+			<signals>
+
+			</signals>
+		</cinput>
+		<cinput value="2" type="T">
+			<coutput value="2" />
+			<signals>
+
+			</signals>
+		</cinput>
+		<cinput value="2" type="D">
+			<coutput value="2" />
+			<signals>
+
+			</signals>
+		</cinput>
+
+	</triggers>
+	<multiplexers>
+<!--  MUXES -->
+		<multiplexer infoInput="4" addressInput="2" output="1"
+			type="MUX">
+			<entry key="1024" value="1" />
+			<entry key="256" value="0" />
+			<entry key="64" value="0" />
+			<entry key="16" value="0" />
+			<entry key="1025" value="0" />
+			<entry key="257" value="1" />
+			<entry key="65" value="0" />
+			<entry key="17" value="0" />
+			<entry key="1028" value="0" />
+			<entry key="260" value="0" />
+			<entry key="68" value="1" />
+			<entry key="20" value="0" />
+			<entry key="1029" value="0" />
+			<entry key="261" value="0" />
+			<entry key="69" value="0" />
+			<entry key="21" value="1" />
+		</multiplexer>
+	</multiplexers>
+<!--  DEMUXES -->
+	<demultiplexers>
+		<demultiplexer infoInput="1" addressInput="2" output="4"
+			type="DEMUX">
+			<entry key="16" value="64" />
+			<entry key="17" value="16" />
+			<entry key="20" value="4" />
+			<entry key="21" value="1" />
+			<entry key="0" value="0" />
+			<entry key="1" value="0" />
+			<entry key="4" value="0" />
+			<entry key="5" value="0" />
+		</demultiplexer>
+	</demultiplexers>
+<!-- COUNTERS -->
+	<counters>
+		<counter infoInput = "3" controlInput="3" output="3" type="COUNT">
+			<entry key="16" value="1" />
+			<entry key="80" value="4" />
+			<entry key="272" value="5" />
+			<entry key="336" value="16" />
+			<entry key="1040" value="17" />
+			<entry key="1104" value="20" />
+			<entry key="1296" value="21" />
+			<entry key="1360" value="0" />
+			<entry key="4" value="21" />
+			<entry key="68" value="0" />
+			<entry key="260" value="1" />
+			<entry key="324" value="4" />
+			<entry key="1028" value="5" />
+			<entry key="1092" value="16" />
+			<entry key="1284" value="17" />
+			<entry key="1348" value="20" />
+			<entry key="61" value="0" />
+			<entry key="125" value="0" />
+			<entry key="317" value="0" />
+			<entry key="381" value="0" />
+			<entry key="1085" value="0" />
+			<entry key="1149" value="0" />
+			<entry key="1341" value="0" />
+			<entry key="1405" value="0" />
+		</counter>
+	</counters>
+</Library>
