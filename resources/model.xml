@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model>
+	<elements>
+		<element number="1" type="logics" function="conjunction"
+			infoInput="2" addressInput="0" controlInput="0" />
+		<element number="2" type="logics" function="disjunction"
+			infoInput="2" addressInput="0" controlInput="0" />
+		<element number="3" type="logics" function="disjunction"
+			infoInput="2" addressInput="0" controlInput="0" />
+		<element number="4" type="logics" function="conjunction"
+			infoInput="2" addressInput="0" controlInput="0" />
+	</elements>
+	<chains>
+		<chain number="1">
+			<contact type="external" name="a" />
+			<contact type="element" numberElement="1" numberContact="1" />
+			<contact type="element" numberElement="4" numberContact="1" />
+		</chain>
+		<chain number="2">
+			<contact type="external" name="b" />
+			<contact type="element" numberElement="1" numberContact="2" />
+		</chain>
+		<chain number="3">
+			<contact type="external" name="c" />
+			<contact type="element" numberElement="2" numberContact="1" />
+		</chain>
+		<chain number="4">
+			<contact type="external" name="d" />
+			<contact type="element" numberElement="2" numberContact="2" />
+		</chain>
+		<chain number="5">
+			<contact type="element" numberElement="1" numberContact="3" />
+			<contact type="element" numberElement="3" numberContact="1" />
+		</chain>
+		<chain number="6">
+			<contact type="element" numberElement="2" numberContact="3" />
+			<contact type="element" numberElement="3" numberContact="2" />
+		</chain>
+		<chain number="7">
+			<contact type="element" numberElement="3" numberContact="3" />
+			<contact type="element" numberElement="4" numberContact="2" />
+		</chain>
+		<chain number="8">
+			<contact type="external" name="e" />
+			<contact type="element" numberElement="4" numberContact="3" />
+		</chain>
+	</chains>
+	<external_contacts>
+		<!-- Object Chain -->
+		<external_contact name="a" type="i" chain="1" />
+		<external_contact name="b" type="i" chain="2" />
+		<external_contact name="c" type="i" chain="3" />
+		<external_contact name="d" type="i" chain="4" />
+		<external_contact name="e" type="o" chain="8" />
+	</external_contacts>
+
+</model>
