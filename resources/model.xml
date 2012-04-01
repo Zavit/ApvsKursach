@@ -12,28 +12,28 @@
 	</elements>
 	<external_contacts>
 		<!-- Object Chain -->
-		<external_contact name="a" type="i" chain="1" />
-		<external_contact name="b" type="i" chain="2" />
-		<external_contact name="c" type="i" chain="3" />
-		<external_contact name="d" type="i" chain="4" />
-		<external_contact name="e" type="o" chain="8" />
+		<external_contact numberContact="0" type="i" chain="1" />
+		<external_contact numberContact="1" type="i" chain="2" />
+		<external_contact numberContact="2" type="i" chain="3" />
+		<external_contact numberContact="3" type="i" chain="4" />
+		<external_contact numberContact="4" type="o" chain="8" />
 	</external_contacts>
 	<chains>
 		<chain number="1">
-			<contact type="external" name="a" />
+			<contact type="external" numberElement = "0" numberContact="0" />
 			<contact type="element" numberElement="1" numberContact="1" />
 			<contact type="element" numberElement="4" numberContact="1" />
 		</chain>
 		<chain number="2">
-			<contact type="external" name="b" />
+			<contact type="external" numberElement = "0" numberContact="1" />
 			<contact type="element" numberElement="1" numberContact="2" />
 		</chain>
 		<chain number="3">
-			<contact type="external" name="c" />
+			<contact type="external" numberElement = "0" numberContact="2" />
 			<contact type="element" numberElement="2" numberContact="1" />
 		</chain>
 		<chain number="4">
-			<contact type="external" name="d" />
+			<contact type="external" numberElement = "0" numberContact="3" />
 			<contact type="element" numberElement="2" numberContact="2" />
 		</chain>
 		<chain number="5">
@@ -49,7 +49,7 @@
 			<contact type="element" numberElement="4" numberContact="2" />
 		</chain>
 		<chain number="8">
-			<contact type="external" name="e" />
+			<contact type="external" numberElement = "0" numberContact="4" />
 			<contact type="element" numberElement="4" numberContact="3" />
 		</chain>
 	</chains>
