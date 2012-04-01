@@ -11,7 +11,9 @@ import java.util.Map.Entry;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Validator;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -24,11 +26,17 @@ public class DescriptionParser
     public static Model parse(String filename) throws Exception
     {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+
         DocumentBuilder builder = factory.newDocumentBuilder();
+
+        //       SchemaFactory schemaFactory = SchemaFactory.newInstance("gfg");
+        //      Schema schema = schemaFactory.newSchema();
+        //      Validator validator = schema.newValidator();
+        //      validator.
         Document description = builder.parse(new FileInputStream(new File(filename)));
         List<Element> listElements = formListElements(description);
         List<ExternalContact> listExtContacts = formListExternalContact(description);
-        Chain chain = formListChains(description);
+        Chain chain = formMapChains(description);
         return new Model(listElements, listExtContacts, chain);
     }
 
@@ -66,18 +74,17 @@ public class DescriptionParser
         return listContacts;
     }
 
-    private static Chain formListChains(Document document)
+    private static Chain formMapChains(Document document)
     {
         NodeList chains = document.getElementsByTagName("chain");
         Chain chainObj = new Chain();
         for (int i = 0; i < chains.getLength(); i++)
         {
-            List<Contact> contactList = new LinkedList<Contact>();
+            List<ElementContact> contactList = new LinkedList<ElementContact>();
             Node chain = chains.item(i);
             NamedNodeMap mapNumber = chain.getAttributes();
             int chainNumber = Integer.parseInt(mapNumber.getNamedItem("number").getTextContent());
             NodeList contacts = chain.getChildNodes();
-
             for (int j = 0; j < contacts.getLength(); j++)
             {
                 Node contact = contacts.item(j);
@@ -87,13 +94,14 @@ public class DescriptionParser
                     String type = map.getNamedItem("type").getTextContent();
                     int numberElement = Integer.parseInt(map.getNamedItem("numberElement").getTextContent());
                     int numberContact = Integer.parseInt(map.getNamedItem("numberContact").getTextContent());
-                    contactList.add(new Contact(type, chainNumber, numberContact, numberElement));
+                    contactList.add(new ElementContact(type, numberContact, numberElement));
                 }
             }
             chainObj.registerChain(chainNumber, contactList);
         }
         return chainObj;
     }
+
     public static class Model
     {
         private List<Element>         listElements;
@@ -180,25 +188,31 @@ public class DescriptionParser
             return controlInput;
         }
 
+        public int getGeneralInput()
+        {
+            return (infoInput + addressInput + controlInput);
+        }
+
         @Override
         public String toString()
         {
-            return getClass().getName()+"[function=" + function + ", type=" + type + ", infoInput=" + infoInput + ", addressInput=" + addressInput + ", controlInput=" + controlInput + "]";
+            return getClass().getName() + "[function=" + function + ", type=" + type + ", infoInput=" + infoInput + ", addressInput=" + addressInput + ", controlInput=" + controlInput + "]";
         }
-        
     }
-    private static class ExternalContact
+    private static class Contact
     {
-        // I-O-E
         private String type;
-        private int    chainNumber;
-        private int numberContact;
+        private int    numberContact;
 
-        private ExternalContact(String type, int chainNumber, int numberContact)
+        private Contact(String type, int numberContact)
         {
             this.type = type;
-            this.chainNumber = chainNumber;
             this.numberContact = numberContact;
+        }
+
+        public String getType()
+        {
+            return type;
         }
 
         public int getNumberContact()
@@ -206,9 +220,21 @@ public class DescriptionParser
             return numberContact;
         }
 
-        public String getType()
+        @Override
+        public String toString()
         {
-            return type;
+            return getClass().getName() + "[type=" + type + "], [numberContact=" + numberContact + "]";
+        }
+
+    }
+    private static class ExternalContact extends Contact
+    {
+        private int chainNumber;
+
+        private ExternalContact(String type, int numberContact, int chainNumber)
+        {
+            super(type, numberContact);
+            this.chainNumber = chainNumber;
         }
 
         public int getChainNumber()
@@ -219,18 +245,16 @@ public class DescriptionParser
         @Override
         public String toString()
         {
-            return  getClass().getName()+"[type=" + type + ", chainNumber=" + chainNumber + ", numberContact=" + numberContact + "]";
+            return super.toString() + ",[chainNumber = " + chainNumber + "]";
         }
-
-        
     }
-    private static class Contact extends ExternalContact
+    private static class ElementContact extends Contact
     {
         private int numberElement;
 
-        private Contact(String type, int chainNumber, int numberContact, int numberElement)
+        private ElementContact(String type, int numberContact, int numberElement)
         {
-            super(type, chainNumber, numberContact);
+            super(type, numberContact);
             this.numberElement = numberElement;
         }
 
@@ -238,42 +262,46 @@ public class DescriptionParser
         {
             return numberElement;
         }
+
         public String toString()
         {
-            return super.toString()+", numberElement ="+numberElement+"]";
+            return super.toString() + ",[numberElement =" + numberElement + "]";
         }
     }
     private static class Chain
     {
-        private Map<Integer, List<Contact>> mapChains = new HashMap<Integer, List<Contact>>();
+        private Map<Integer, List<ElementContact>> mapChains = new HashMap<Integer, List<ElementContact>>();
 
         private Chain()
         {
-            
         }
-        public void registerChain(Integer number,List<Contact> contact)
+
+        public void registerChain(Integer number,
+                                  List<ElementContact> contact)
         {
-          mapChains.put(number, contact);  
+            mapChains.put(number, contact);
         }
+
         public int getChainsCount()
         {
             return mapChains.size();
         }
-        public List<Contact> getListContacts(int chain)
+
+        public List<ElementContact> getListContacts(int chain)
         {
             return Collections.unmodifiableList(mapChains.get(chain));
         }
+
         @Override
         public String toString()
         {
             StringBuilder builder = new StringBuilder();
             builder.append(getClass().getName()).append("\n");
-            for(Entry<Integer, List<Contact>> entry: mapChains.entrySet())
+            for (Entry<Integer, List<ElementContact>> entry : mapChains.entrySet())
             {
                 builder.append(entry.getKey()).append("=").append(entry.getValue()).append("\n");
             }
             return builder.toString();
         }
     }
-
 }
