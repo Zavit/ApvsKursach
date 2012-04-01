@@ -5,18 +5,18 @@ public class ExternalContact
     // I-O-E
     private String type;
     private int    chainNumber;
-    private String name;
+    private int numberContact;
 
-    public ExternalContact(String type, int chainNumber, String name)
+    public ExternalContact(String type, int chainNumber, int numberContact)
     {
         this.type = type;
         this.chainNumber = chainNumber;
-        this.name = name;
+        this.numberContact = numberContact;
     }
 
-    public String getName()
+    public int getNumberContact()
     {
-        return name;
+        return numberContact;
     }
 
     public String getType()
@@ -29,4 +29,11 @@ public class ExternalContact
         return chainNumber;
     }
 
+    @Override
+    public String toString()
+    {
+        return  getClass().getName()+"[type=" + type + ", chainNumber=" + chainNumber + ", numberContact=" + numberContact + "]";
+    }
+
+    
 }

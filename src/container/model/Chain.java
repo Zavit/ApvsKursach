@@ -1,9 +1,11 @@
 package container.model;
 
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class Chain
 {
@@ -24,5 +26,16 @@ public class Chain
     public List<Contact> getListContacts(int chain)
     {
         return Collections.unmodifiableList(mapChains.get(chain));
+    }
+    @Override
+    public String toString()
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.append(getClass().getName()).append("\n");
+        for(Entry<Integer, List<Contact>> entry: mapChains.entrySet())
+        {
+            builder.append(entry.getKey()).append("=").append(entry.getValue()).append("\n");
+        }
+        return builder.toString();
     }
 }

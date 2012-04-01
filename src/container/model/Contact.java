@@ -2,16 +2,20 @@ package container.model;
 
 public class Contact extends ExternalContact
 {
-    private int elementNumber;
+    private int numberElement;
 
-    public Contact(String type, int chainNumber, String name, int elementNumber)
+    public Contact(String type, int chainNumber, int numberContact, int numberElement)
     {
-        super(type, chainNumber, name);
-        this.elementNumber = elementNumber;
+        super(type, chainNumber, numberContact);
+        this.numberElement = numberElement;
     }
 
     public int getElementNumber()
     {
-        return elementNumber;
+        return numberElement;
+    }
+    public String toString()
+    {
+        return super.toString()+", numberElement ="+numberElement+"]";
     }
 }
