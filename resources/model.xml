@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<model>
+<model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="schemaModel.xsd">
 	<elements>
-		<element type="logics" function="conjunction"
-			infoInput="2" addressInput="0" controlInput="0" />
-		<element  type="logics" function="disjunction"
-			infoInput="2" addressInput="0" controlInput="0" />
-		<element  type="logics" function="disjunction"
-			infoInput="2" addressInput="0" controlInput="0" />
-		<element  type="logics" function="conjunction"
-			infoInput="2" addressInput="0" controlInput="0" />
+		<element type="logics" function="conjunction" infoInput="2"
+			addressInput="0" controlInput="0" />
+		<element type="logics" function="disjunction" infoInput="2"
+			addressInput="0" controlInput="0" />
+		<element type="logics" function="disjunction" infoInput="2"
+			addressInput="0" controlInput="0" />
+		<element type="logics" function="conjunction" infoInput="2"
+			addressInput="0" controlInput="0" />
 	</elements>
 	<external_contacts>
 		<!-- Object Chain -->
@@ -20,20 +21,20 @@
 	</external_contacts>
 	<chains>
 		<chain number="1">
-			<contact type="external" numberElement = "0" numberContact="0" />
+			<contact type="external" numberElement="0" numberContact="0" />
 			<contact type="element" numberElement="1" numberContact="1" />
 			<contact type="element" numberElement="4" numberContact="1" />
 		</chain>
 		<chain number="2">
-			<contact type="external" numberElement = "0" numberContact="1" />
+			<contact type="external" numberElement="0" numberContact="1" />
 			<contact type="element" numberElement="1" numberContact="2" />
 		</chain>
 		<chain number="3">
-			<contact type="external" numberElement = "0" numberContact="2" />
+			<contact type="external" numberElement="0" numberContact="2" />
 			<contact type="element" numberElement="2" numberContact="1" />
 		</chain>
 		<chain number="4">
-			<contact type="external" numberElement = "0" numberContact="3" />
+			<contact type="external" numberElement="0" numberContact="3" />
 			<contact type="element" numberElement="2" numberContact="2" />
 		</chain>
 		<chain number="5">
@@ -49,9 +50,8 @@
 			<contact type="element" numberElement="4" numberContact="2" />
 		</chain>
 		<chain number="8">
-			<contact type="external" numberElement = "0" numberContact="4" />
+			<contact type="external" numberElement="0" numberContact="4" />
 			<contact type="element" numberElement="4" numberContact="3" />
 		</chain>
 	</chains>
-
 </model>

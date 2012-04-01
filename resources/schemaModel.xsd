@@ -1,11 +1,67 @@
 <?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="http://example"
-           xmlns="http://example"
-           elementFormDefault="qualified">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-<xs:element name="schemaModel">
+	<xs:element name="model">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="elements" type="_elements" minOccurs="1"
+					maxOccurs="1" />
+				<xs:element name="external_contacts" type="_contacts"
+					minOccurs="1" maxOccurs="1" />
+				<xs:element name="chains" type="_chains" minOccurs="1"
+					maxOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- ELEMENTS -->
+	<xs:complexType name="_elements">
+		<xs:sequence>
+			<xs:element name="element" type="_element" minOccurs="1"
+				maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ELEMENT -->
+	<xs:complexType name="_element">
+		<xs:attribute name="type" type="xs:string" use="required" />
+		<xs:attribute name="function" type="xs:string" use="required" />
+		<xs:attribute name="infoInput" type="xs:int" use="required" />
+		<xs:attribute name="addressInput" type="xs:int" use="required" />
+		<xs:attribute name="controlInput" type="xs:int" use="required" />
+	</xs:complexType>
 
-</xs:element>
+	<!-- EXTERNAL CONTACTS -->
+	<xs:complexType name="_contacts">
+		<xs:sequence>
+			<xs:element name="external_contact" type="_external_contact"
+				minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<!-- EXTERNAL CONTACT -->
+	<xs:complexType name="_external_contact">
+		<xs:attribute name="numberContact" type="xs:int" use="required" />
+		<xs:attribute name="type" type="xs:string" use="required" />
+		<xs:attribute name="chain" type="xs:int" use="required" />
+	</xs:complexType>
 
+	<!-- CHAINS -->
+	<xs:complexType name="_chains">
+		<xs:sequence>
+			<xs:element name="chain" type="__chain" minOccurs="1"
+				maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<!-- CHAIN -->
+	<xs:complexType name="__chain">
+		<xs:sequence>
+			<xs:element name="contact" type="_contact" minOccurs="1"
+				maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="number" type="xs:int" use="required" />
+	</xs:complexType>
+	<!-- CONTACT -->
+	<xs:complexType name="_contact">
+		<xs:attribute name="type" type="xs:string" use="required" />
+		<xs:attribute name="numberElement" type="xs:int" use="required" />
+		<xs:attribute name="numberContact" type="xs:int" use="required" />
+	</xs:complexType>
 </xs:schema>
