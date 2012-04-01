@@ -18,6 +18,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import container.model.Chain;
+import container.model.Contact;
 import container.model.Element;
 import container.model.ExternalContact;
 import container.model.Model;
@@ -26,7 +27,8 @@ public class DescriptionParser
 {
     public static void main(String[] args) throws Exception
     {
-
+        Model model = new DescriptionParser().parse();
+        System.out.println(model);
     }
 
     public Model parse() throws ParserConfigurationException, FileNotFoundException, SAXException, IOException
@@ -38,7 +40,8 @@ public class DescriptionParser
         Document description = builder.parse(new FileInputStream(new File("resources/model.xml")));
         List<Element> listElements = formListElements(description);
         List<ExternalContact> listExtContacts = formListExternalContact(description);
-        return null;
+        Chain chain = formListChains(description);
+        return new Model(listElements, listExtContacts, chain);
     }
 
     private List<Element> formListElements(Document document)
@@ -69,8 +72,8 @@ public class DescriptionParser
             NamedNodeMap map = contact.getAttributes();
             String type = map.getNamedItem("type").getTextContent();
             int chain = Integer.parseInt(map.getNamedItem("chain").getTextContent());
-            String name = map.getNamedItem("name").getTextContent();
-            listContacts.add(new ExternalContact(type, chain, name));
+            int numberExtContact = Integer.parseInt(map.getNamedItem("numberContact").getTextContent());
+            listContacts.add(new ExternalContact(type, chain, numberExtContact));
         }
         return listContacts;
     }
@@ -81,21 +84,31 @@ public class DescriptionParser
         Chain chainObj = new Chain();
         for (int i = 0; i < chains.getLength(); i++)
         {
+            List<Contact> contactList = new LinkedList<Contact>();
             Node chain = chains.item(i);
 
             NamedNodeMap mapNumber = chain.getAttributes();
 
-            int number = Integer.parseInt(mapNumber.getNamedItem("number").getTextContent());
+            int chainNumber = Integer.parseInt(mapNumber.getNamedItem("number").getTextContent());
 
             NodeList contacts = chain.getChildNodes();
+
+
             for (int j = 0; j < contacts.getLength(); j++)
             {
                 Node contact = contacts.item(j);
+                if (contact.getNodeType() == contact.TEXT_NODE)
+                {
+                    continue;
+
+                }
                 NamedNodeMap map = contact.getAttributes();
                 String type = map.getNamedItem("type").getTextContent();
-                String numberElement = mapNumber.getNamedItem("numberElement").getTextContent();
-                String numberContact = mapNumber.getNamedItem("numberContact").getTextContent();
+                int numberElement = Integer.parseInt(map.getNamedItem("numberElement").getTextContent());
+                int numberContact = Integer.parseInt(map.getNamedItem("numberContact").getTextContent());
+                contactList.add(new Contact(type, chainNumber, numberContact, numberElement));
             }
+            chainObj.registerChain(chainNumber, contactList);
         }
         return chainObj;
     }
