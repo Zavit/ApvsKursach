@@ -25,10 +25,10 @@ import org.xml.sax.helpers.DefaultHandler;
 public class DescriptionParser
 {
 
-    public static Model parse(String filename) throws Exception
+    public static Model parse(String xmlFile, String xmlSchema) throws Exception
     {
         SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-        Schema schema = schemaFactory.newSchema(new File("resources/schemaModel.xsd"));
+        Schema schema = schemaFactory.newSchema(new File(xmlSchema));
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setSchema(schema);
         factory.setNamespaceAware(true);
@@ -38,7 +38,7 @@ public class DescriptionParser
         XMLErrorHandler error = new XMLErrorHandler();
 
         builder.setErrorHandler(error);
-        Document description = builder.parse(new File(filename));
+        Document description = builder.parse(new File(xmlFile));
 
         if (error.getSaxParseException() != null)
         {
