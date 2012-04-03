@@ -3,20 +3,20 @@
 	xsi:noNamespaceSchemaLocation="schemaModel.xsd">
 	<elements>
 		<element type="logics" function="conjunction" infoInput="2"
-			addressInput="0" controlInput="0" />
+			addressInput="0" controlInput="0" delay = "18"/>
 		<element type="logics" function="disjunction" infoInput="2"
-			addressInput="0" controlInput="0" />
+			addressInput="0" controlInput="0" delay = "25" />
 		<element type="logics" function="disjunction" infoInput="2"
-			addressInput="0" controlInput="0" />
+			addressInput="0" controlInput="0" delay = "25"/>
 		<element type="logics" function="conjunction" infoInput="2"
-			addressInput="0" controlInput="0" />
+			addressInput="0" controlInput="0" delay = "18"/>
 	</elements>
 	<external_contacts>
 		<!-- Object Chain -->
-		<external_contact numberContact="0" type="i" chain="1" />
-		<external_contact numberContact="1" type="i" chain="2" />
-		<external_contact numberContact="2" type="i" chain="3" />
-		<external_contact numberContact="3" type="i" chain="4" />
+		<external_contact numberContact="0" type="i" chain="1" value = "0"/>
+		<external_contact numberContact="1" type="i" chain="2" value = "1"/>
+		<external_contact numberContact="2" type="i" chain="3" value = "1"/>
+		<external_contact numberContact="3" type="i" chain="4" value = "0"/>
 		<external_contact numberContact="4" type="o" chain="8" />
 	</external_contacts>
 	<chains>

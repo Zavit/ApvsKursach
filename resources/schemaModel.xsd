@@ -27,6 +27,7 @@
 		<xs:attribute name="infoInput" type="xs:int" use="required" />
 		<xs:attribute name="addressInput" type="xs:int" use="required" />
 		<xs:attribute name="controlInput" type="xs:int" use="required" />
+		<xs:attribute name="delay" type="xs:int" use="required" />
 	</xs:complexType>
 
 	<!-- EXTERNAL CONTACTS -->
@@ -38,9 +39,11 @@
 	</xs:complexType>
 	<!-- EXTERNAL CONTACT -->
 	<xs:complexType name="_external_contact">
-		<xs:attribute name="numberContact" type="xs:int" use="required" />
+		<xs:attribute name="numberContact" type="xs:int"
+			use="required" />
 		<xs:attribute name="type" type="xs:string" use="required" />
 		<xs:attribute name="chain" type="xs:int" use="required" />
+		<xs:attribute name="value" type="xs:int" use="optional" />
 	</xs:complexType>
 
 	<!-- CHAINS -->
@@ -61,7 +64,17 @@
 	<!-- CONTACT -->
 	<xs:complexType name="_contact">
 		<xs:attribute name="type" type="xs:string" use="required" />
-		<xs:attribute name="numberElement" type="xs:int" use="required" />
-		<xs:attribute name="numberContact" type="xs:int" use="required" />
+		<xs:attribute name="numberElement" type="xs:int"
+			use="required" />
+		<xs:attribute name="numberContact" type="xs:int"
+			use="required" />
 	</xs:complexType>
+	<xs:element name="intValue">
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:minInclusive value="0" />
+				<xs:maxInclusive value="10000" />
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
 </xs:schema>

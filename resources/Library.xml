@@ -3,7 +3,6 @@
 	<logics>
 		<!-- AND -->
 		<conjunction>
-			<delay value="15" />
 			<cinput value="2">
 				<signals>
 					<entry key="5" value="1" />
@@ -27,7 +26,6 @@
 		</conjunction>
 		<!-- AND NOT -->
 		<conjuntion_inversion>
-			<delay value="15" />
 			<cinput value="2">
 				<signals>
 					<entry key="5" value="0" />
@@ -51,7 +49,6 @@
 		</conjuntion_inversion>
 		<!-- OR -->
 		<disjunction>
-			<delay value="22" />
 			<cinput value="2">
 				<signals>
 					<entry key="0" value="0" />
@@ -75,7 +72,6 @@
 		</disjunction>
 		<!-- OR NOT -->
 		<disjunction_inversion>
-			<delay value="22" />
 			<cinput value="2">
 				<signals>
 					<entry key="0" value="1" />
@@ -100,7 +96,6 @@
 	</logics>
 <!--  DECODERS -->
 	<decoders>
-		<delay value="15" />
 		<decoder controlInput="3" infoInput="3" output="8" type="KP531ID7">
 			<signals>
 				<entry key="682" value="21845" />
@@ -170,7 +165,6 @@
 		<cinput value="2" type="RS">
 			<coutput value="2" />
 			<signals>
-
 			</signals>
 		</cinput>
 		<cinput value="3" type="JK">
