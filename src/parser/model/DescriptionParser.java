@@ -9,39 +9,49 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
-import javax.xml.validation.Validator;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXParseException;
+import org.xml.sax.helpers.DefaultHandler;
 
 public class DescriptionParser
 {
 
     public static Model parse(String filename) throws Exception
     {
+        SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        Schema schema = schemaFactory.newSchema(new File("resources/schemaModel.xsd"));
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-
+        factory.setSchema(schema);
+        factory.setNamespaceAware(true);
+        factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
         DocumentBuilder builder = factory.newDocumentBuilder();
 
-        //       SchemaFactory schemaFactory = SchemaFactory.newInstance("gfg");
-        //      Schema schema = schemaFactory.newSchema();
-        //      Validator validator = schema.newValidator();
-        //      validator.
-        Document description = builder.parse(new FileInputStream(new File(filename)));
-        List<Element> listElements = formListElements(description);
-        List<ExternalContact> listExtContacts = formListExternalContact(description);
-        Chain chain = formMapChains(description);
-        return new Model(listElements, listExtContacts, chain);
+        XMLErrorHandler error = new XMLErrorHandler();
+
+        builder.setErrorHandler(error);
+        Document description = builder.parse(new File(filename));
+
+        if (error.getSaxParseException() != null)
+        {
+            System.out.println(error.getSaxParseException().getMessage() + " line " + error.getSaxParseException().getLineNumber() + " column - " + error.getSaxParseException().getColumnNumber());
+            return null;
+        }
+        //////////////////////////MODEL FORM //////////////////////////
+        return formModel(description);
     }
 
-    private static List<Element> formListElements(Document document)
+    private static Model formModel(Document document)
     {
+        //elements
         NodeList elements = document.getElementsByTagName("element");
         List<Element> listElement = new LinkedList<Element>();
         for (int i = 0; i < elements.getLength(); i++)
@@ -55,27 +65,20 @@ public class DescriptionParser
             int controlInput = Integer.parseInt(map.getNamedItem("controlInput").getTextContent());
             listElement.add(new Element(function, type, infoInput, addressInput, controlInput));
         }
-        return listElement;
-    }
-
-    private static List<ExternalContact> formListExternalContact(Document document)
-    {
-        NodeList contacts = document.getElementsByTagName("external_contact");
+        //external
+        NodeList ext_contacts = document.getElementsByTagName("external_contact");
         List<ExternalContact> listContacts = new LinkedList<ExternalContact>();
-        for (int i = 0; i < contacts.getLength(); i++)
+        for (int i = 0; i < ext_contacts.getLength(); i++)
         {
-            Node contact = contacts.item(i);
+            Node contact = ext_contacts.item(i);
             NamedNodeMap map = contact.getAttributes();
             String type = map.getNamedItem("type").getTextContent();
             int chain = Integer.parseInt(map.getNamedItem("chain").getTextContent());
+            int value = map.getNamedItem("value") != null ? Integer.parseInt(map.getNamedItem("value").getTextContent()) : -1;
             int numberExtContact = Integer.parseInt(map.getNamedItem("numberContact").getTextContent());
-            listContacts.add(new ExternalContact(type, chain, numberExtContact));
+            listContacts.add(new ExternalContact(type, chain, numberExtContact, value));
         }
-        return listContacts;
-    }
-
-    private static Chain formMapChains(Document document)
-    {
+        //chains
         NodeList chains = document.getElementsByTagName("chain");
         Chain chainObj = new Chain();
         for (int i = 0; i < chains.getLength(); i++)
@@ -99,9 +102,8 @@ public class DescriptionParser
             }
             chainObj.registerChain(chainNumber, contactList);
         }
-        return chainObj;
+        return new Model(listElement,listContacts,chainObj);
     }
-
     public static class Model
     {
         private List<Element>         listElements;
@@ -146,7 +148,7 @@ public class DescriptionParser
             return builder.append(chain).toString();
         }
     }
-    private static class Element
+    public static class Element
     {
         private String function;
         private String type;
@@ -199,7 +201,7 @@ public class DescriptionParser
             return getClass().getName() + "[function=" + function + ", type=" + type + ", infoInput=" + infoInput + ", addressInput=" + addressInput + ", controlInput=" + controlInput + "]";
         }
     }
-    private static class Contact
+    public static class Contact
     {
         private String type;
         private int    numberContact;
@@ -227,14 +229,21 @@ public class DescriptionParser
         }
 
     }
-    private static class ExternalContact extends Contact
+    public static class ExternalContact extends Contact
     {
         private int chainNumber;
+        private int value;
 
-        private ExternalContact(String type, int numberContact, int chainNumber)
+        private ExternalContact(String type, int numberContact, int chainNumber, int value)
         {
             super(type, numberContact);
             this.chainNumber = chainNumber;
+            this.value = value;
+        }
+
+        public int getValue()
+        {
+            return value;
         }
 
         public int getChainNumber()
@@ -245,10 +254,10 @@ public class DescriptionParser
         @Override
         public String toString()
         {
-            return super.toString() + ",[chainNumber = " + chainNumber + "]";
+            return super.toString() + ",[chainNumber = " + chainNumber + "]"+",[value = " + value + "]";
         }
     }
-    private static class ElementContact extends Contact
+    public static class ElementContact extends Contact
     {
         private int numberElement;
 
@@ -268,7 +277,7 @@ public class DescriptionParser
             return super.toString() + ",[numberElement =" + numberElement + "]";
         }
     }
-    private static class Chain
+    public static class Chain
     {
         private Map<Integer, List<ElementContact>> mapChains = new HashMap<Integer, List<ElementContact>>();
 
@@ -304,4 +313,28 @@ public class DescriptionParser
             return builder.toString();
         }
     }
+    private static class XMLErrorHandler extends DefaultHandler
+    {
+        private boolean           hasValidationError = false;
+        private boolean           hasFattalError     = false;
+        private SAXParseException saxParseException  = null;
+
+        public void error(SAXParseException exception)
+        {
+            hasValidationError = true;
+            saxParseException = exception;
+        }
+
+        public void fatalError(SAXParseException exception)
+        {
+            hasFattalError = true;
+            saxParseException = exception;
+        }
+
+        public SAXParseException getSaxParseException()
+        {
+            return saxParseException;
+        }
+    }
+
 }
