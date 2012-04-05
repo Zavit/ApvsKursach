@@ -22,10 +22,13 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import constants.XMLProperties;
+
 public class DescriptionParser
 {
 
-    public static Model parse(String xmlFile, String xmlSchema) throws Exception
+    public static Model parse(String xmlFile,
+                              String xmlSchema) throws Exception
     {
         SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         Schema schema = schemaFactory.newSchema(new File(xmlSchema));
@@ -52,41 +55,42 @@ public class DescriptionParser
     private static Model formModel(Document document)
     {
         //elements
-        NodeList elements = document.getElementsByTagName("element");
+        NodeList elements = document.getElementsByTagName(XMLProperties.ELEMENT);
         List<Element> listElement = new LinkedList<Element>();
         for (int i = 0; i < elements.getLength(); i++)
         {
             Node element = elements.item(i);
             NamedNodeMap map = element.getAttributes();
-            String type = map.getNamedItem("type").getTextContent();
-            String function = map.getNamedItem("function").getTextContent();
-            int infoInput = Integer.parseInt(map.getNamedItem("infoInput").getTextContent());
-            int addressInput = Integer.parseInt(map.getNamedItem("addressInput").getTextContent());
-            int controlInput = Integer.parseInt(map.getNamedItem("controlInput").getTextContent());
-            listElement.add(new Element(function, type, infoInput, addressInput, controlInput));
+            String type = map.getNamedItem(XMLProperties.TYPE).getTextContent();
+            String function = map.getNamedItem(XMLProperties.FUNCTION).getTextContent();
+            int infoInput = Integer.parseInt(map.getNamedItem(XMLProperties.INFO_INPUT).getTextContent());
+            int addressInput = Integer.parseInt(map.getNamedItem(XMLProperties.ADDRESS_INPUT).getTextContent());
+            int controlInput = Integer.parseInt(map.getNamedItem(XMLProperties.CONTROL_INPUT).getTextContent());
+            int delay = Integer.parseInt(map.getNamedItem(XMLProperties.DELAY).getTextContent());
+            listElement.add(new Element(function, type, infoInput, addressInput, controlInput,delay));
         }
         //external
-        NodeList ext_contacts = document.getElementsByTagName("external_contact");
+        NodeList ext_contacts = document.getElementsByTagName(XMLProperties.EXTERNAL_CONTACT);
         List<ExternalContact> listContacts = new LinkedList<ExternalContact>();
         for (int i = 0; i < ext_contacts.getLength(); i++)
         {
             Node contact = ext_contacts.item(i);
             NamedNodeMap map = contact.getAttributes();
-            String type = map.getNamedItem("type").getTextContent();
-            int chain = Integer.parseInt(map.getNamedItem("chain").getTextContent());
-            int value = map.getNamedItem("value") != null ? Integer.parseInt(map.getNamedItem("value").getTextContent()) : -1;
-            int numberExtContact = Integer.parseInt(map.getNamedItem("numberContact").getTextContent());
+            String type = map.getNamedItem(XMLProperties.TYPE).getTextContent();
+            int chain = Integer.parseInt(map.getNamedItem(XMLProperties.CHAIN).getTextContent());
+            int value = map.getNamedItem(XMLProperties.VALUE) != null ? Integer.parseInt(map.getNamedItem(XMLProperties.VALUE).getTextContent()) : -1;
+            int numberExtContact = Integer.parseInt(map.getNamedItem(XMLProperties.NUMBER_CONTACT).getTextContent());
             listContacts.add(new ExternalContact(type, chain, numberExtContact, value));
         }
         //chains
-        NodeList chains = document.getElementsByTagName("chain");
+        NodeList chains = document.getElementsByTagName(XMLProperties.CHAIN);
         Chain chainObj = new Chain();
         for (int i = 0; i < chains.getLength(); i++)
         {
             List<ElementContact> contactList = new LinkedList<ElementContact>();
             Node chain = chains.item(i);
             NamedNodeMap mapNumber = chain.getAttributes();
-            int chainNumber = Integer.parseInt(mapNumber.getNamedItem("number").getTextContent());
+            int chainNumber = Integer.parseInt(mapNumber.getNamedItem(XMLProperties.NUMBER).getTextContent());
             NodeList contacts = chain.getChildNodes();
             for (int j = 0; j < contacts.getLength(); j++)
             {
@@ -94,16 +98,17 @@ public class DescriptionParser
                 if (contact.getNodeType() == Node.ELEMENT_NODE)
                 {
                     NamedNodeMap map = contact.getAttributes();
-                    String type = map.getNamedItem("type").getTextContent();
-                    int numberElement = Integer.parseInt(map.getNamedItem("numberElement").getTextContent());
-                    int numberContact = Integer.parseInt(map.getNamedItem("numberContact").getTextContent());
+                    String type = map.getNamedItem(XMLProperties.TYPE).getTextContent();
+                    int numberElement = Integer.parseInt(map.getNamedItem(XMLProperties.NUMBER_ELEMENT).getTextContent());
+                    int numberContact = Integer.parseInt(map.getNamedItem(XMLProperties.NUMBER_CONTACT).getTextContent());
                     contactList.add(new ElementContact(type, numberContact, numberElement));
                 }
             }
             chainObj.registerChain(chainNumber, contactList);
         }
-        return new Model(listElement,listContacts,chainObj);
+        return new Model(listElement, listContacts, chainObj);
     }
+
     public static class Model
     {
         private List<Element>         listElements;
@@ -155,14 +160,16 @@ public class DescriptionParser
         private int    infoInput;
         private int    addressInput;
         private int    controlInput;
+        private int    delay;
 
-        private Element(String function, String type, int infoInput, int addressInput, int controlInput)
+        private Element(String function, String type, int infoInput, int addressInput, int controlInput, int delay)
         {
             this.function = function;
             this.type = type;
             this.infoInput = infoInput;
             this.addressInput = addressInput;
             this.controlInput = controlInput;
+            this.delay = delay;
         }
 
         public String getFunction()
@@ -190,6 +197,11 @@ public class DescriptionParser
             return controlInput;
         }
 
+        public int getDelay()
+        {
+            return delay;
+        }
+
         public int getGeneralInput()
         {
             return (infoInput + addressInput + controlInput);
@@ -198,7 +210,7 @@ public class DescriptionParser
         @Override
         public String toString()
         {
-            return getClass().getName() + "[function=" + function + ", type=" + type + ", infoInput=" + infoInput + ", addressInput=" + addressInput + ", controlInput=" + controlInput + "]";
+            return getClass().getName() + "[function=" + function + ", type=" + type + ", infoInput=" + infoInput + ", addressInput=" + addressInput + ", controlInput=" + controlInput + ", delay="+delay+"]";
         }
     }
     public static class Contact
@@ -254,7 +266,7 @@ public class DescriptionParser
         @Override
         public String toString()
         {
-            return super.toString() + ",[chainNumber = " + chainNumber + "]"+",[value = " + value + "]";
+            return super.toString() + ",[chainNumber = " + chainNumber + "]" + ",[value = " + value + "]";
         }
     }
     public static class ElementContact extends Contact
