@@ -1,13 +1,13 @@
 package parser.model;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
@@ -303,11 +303,11 @@ public class DescriptionParser
             mapChains.put(number, contact);
         }
 
-        public int getChainsCount()
+        private int getChainsCount()
         {
             return mapChains.size();
         }
-
+      
         public List<ElementContact> getListContacts(int chain)
         {
             return Collections.unmodifiableList(mapChains.get(chain));

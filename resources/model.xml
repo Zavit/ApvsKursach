@@ -20,36 +20,36 @@
 		<external_contact numberContact="4" type="o" chain="8" />
 	</external_contacts>
 	<chains>
-		<chain number="1">
+		<chain number="0">
 			<contact type="external" numberElement="0" numberContact="0" />
 			<contact type="element" numberElement="1" numberContact="1" />
 			<contact type="element" numberElement="4" numberContact="1" />
 		</chain>
-		<chain number="2">
+		<chain number="1">
 			<contact type="external" numberElement="0" numberContact="1" />
 			<contact type="element" numberElement="1" numberContact="2" />
 		</chain>
-		<chain number="3">
+		<chain number="2">
 			<contact type="external" numberElement="0" numberContact="2" />
 			<contact type="element" numberElement="2" numberContact="1" />
 		</chain>
-		<chain number="4">
+		<chain number="3">
 			<contact type="external" numberElement="0" numberContact="3" />
 			<contact type="element" numberElement="2" numberContact="2" />
 		</chain>
-		<chain number="5">
+		<chain number="4">
 			<contact type="element" numberElement="1" numberContact="3" />
 			<contact type="element" numberElement="3" numberContact="1" />
 		</chain>
-		<chain number="6">
+		<chain number="5">
 			<contact type="element" numberElement="2" numberContact="3" />
 			<contact type="element" numberElement="3" numberContact="2" />
 		</chain>
-		<chain number="7">
+		<chain number="6">
 			<contact type="element" numberElement="3" numberContact="3" />
 			<contact type="element" numberElement="4" numberContact="2" />
 		</chain>
-		<chain number="8">
+		<chain number="7">
 			<contact type="external" numberElement="0" numberContact="4" />
 			<contact type="element" numberElement="4" numberContact="3" />
 		</chain>
