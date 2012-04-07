@@ -1,12 +1,10 @@
 package parser.model;
 
 import java.io.File;
-import java.util.Collections;
-import java.util.HashMap;
+
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
+
 
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
@@ -20,6 +18,12 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
+
+import parser.model.Model.Chain;
+import parser.model.Model.Element;
+import parser.model.Model.ElementContact;
+import parser.model.Model.ExternalContact;
+import parser.model.Model.Input;
 
 import constants.XMLProperties;
 
@@ -66,7 +70,7 @@ public class DescriptionParser
             int addressInput = Integer.parseInt(map.getNamedItem(XMLProperties.ADDRESS_INPUT).getTextContent());
             int controlInput = Integer.parseInt(map.getNamedItem(XMLProperties.CONTROL_INPUT).getTextContent());
             int delay = Integer.parseInt(map.getNamedItem(XMLProperties.DELAY).getTextContent());
-            listElement.add(new Element(function, type, infoInput, addressInput, controlInput,delay));
+            listElement.add(new Element(function, type, new Input(infoInput, addressInput, controlInput), delay));
         }
         //external
         NodeList ext_contacts = document.getElementsByTagName(XMLProperties.EXTERNAL_CONTACT);
@@ -107,192 +111,17 @@ public class DescriptionParser
         }
         return new Model(listElement, listContacts, chainObj);
     }
-
-    public static class Model
-    {
-        private List<Element>         listElements;
-        private List<ExternalContact> listExtContacts;
-        private Chain                 chain;
-
-        private Model(List<Element> listElements, List<ExternalContact> listExtContacts, Chain chain)
-        {
-            this.listElements = listElements;
-            this.listExtContacts = listExtContacts;
-            this.chain = chain;
-        }
-
-        public Chain getChain()
-        {
-            return chain;
-        }
-        public int getChainCount()
-        {
-            return chain.getChainsCount();
-        }
-        public int getExternalContactCount()
-        {
-            return listExtContacts.size()-1;
-        }
-
-        public List<Element> getListElements()
-        {
-            return listElements;
-        }
-
-        public List<ExternalContact> getListExtContacts()
-        {
-            return listExtContacts;
-        }
-    }
-    public static class Element
-    {
-        private String function;
-        private String type;
-        private int    infoInput;
-        private int    addressInput;
-        private int    controlInput;
-        private int    delay;
-
-        private Element(String function, String type, int infoInput, int addressInput, int controlInput, int delay)
-        {
-            this.function = function;
-            this.type = type;
-            this.infoInput = infoInput;
-            this.addressInput = addressInput;
-            this.controlInput = controlInput;
-            this.delay = delay;
-        }
-
-        public String getFunction()
-        {
-            return function;
-        }
-
-        public String getType()
-        {
-            return type;
-        }
-
-        public int getInfoInput()
-        {
-            return infoInput;
-        }
-
-        public int getAddressInput()
-        {
-            return addressInput;
-        }
-
-        public int getControlInput()
-        {
-            return controlInput;
-        }
-
-        public int getDelay()
-        {
-            return delay;
-        }
-
-        public int getGeneralInput()
-        {
-            return (infoInput + addressInput + controlInput);
-        }
-    }
-    public static class Contact
-    {
-        private String type;
-        private int    numberContact;
-
-        private Contact(String type, int numberContact)
-        {
-            this.type = type;
-            this.numberContact = numberContact;
-        }
-
-        public String getType()
-        {
-            return type;
-        }
-
-        public int getNumberContact()
-        {
-            return numberContact;
-        }
-    }
-    public static class ExternalContact extends Contact
-    {
-        private int chainNumber;
-        private int value;
-
-        private ExternalContact(String type, int numberContact, int chainNumber, int value)
-        {
-            super(type, numberContact);
-            this.chainNumber = chainNumber;
-            this.value = value;
-        }
-
-        public int getValue()
-        {
-            return value;
-        }
-
-        public int getChainNumber()
-        {
-            return chainNumber;
-        }
-    }
-    public static class ElementContact extends Contact
-    {
-        private int numberElement;
-        private ElementContact(String type, int numberContact, int numberElement)
-        {
-            super(type, numberContact);
-            this.numberElement = numberElement;
-       }
-        public int getElementNumber()
-        {
-            return numberElement;
-        }
-    }
-    public static class Chain
-    {
-        private Map<Integer, List<ElementContact>> mapChains = new HashMap<Integer, List<ElementContact>>();
-
-        private Chain()
-        {
-        }
-
-        public void registerChain(Integer number,
-                                  List<ElementContact> contact)
-        {
-            mapChains.put(number, contact);
-        }
-
-        public int getChainsCount()
-        {
-            return mapChains.size();
-        }
-      
-        public List<ElementContact> getListContacts(int chain)
-        {
-            return Collections.unmodifiableList(mapChains.get(chain));
-        }
-    }
     private static class XMLErrorHandler extends DefaultHandler
     {
-        private boolean           hasValidationError = false;
-        private boolean           hasFattalError     = false;
         private SAXParseException saxParseException  = null;
 
         public void error(SAXParseException exception)
         {
-            hasValidationError = true;
             saxParseException = exception;
         }
 
         public void fatalError(SAXParseException exception)
         {
-            hasFattalError = true;
             saxParseException = exception;
         }
 
@@ -301,5 +130,7 @@ public class DescriptionParser
             return saxParseException;
         }
     }
+ 
+
 
 }
