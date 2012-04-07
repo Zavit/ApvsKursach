@@ -8,6 +8,7 @@ public interface XMLProperties
     String INFO_INPUT       = "infoInput";
     String ADDRESS_INPUT    = "addressInput";
     String CONTROL_INPUT    = "controlInput";
+    String OUTPUT           = "output";
     String DELAY            = "delay";
     String EXTERNAL_CONTACT = "external_contact";
     String CHAIN            = "chain";
@@ -15,4 +16,5 @@ public interface XMLProperties
     String NUMBER_CONTACT   = "numberContact";
     String NUMBER           = "number";
     String NUMBER_ELEMENT   = "numberElement";
+
 }
