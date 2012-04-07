@@ -1,12 +1,6 @@
 package modeling;
 
-import java.io.File;
 
-import javax.xml.XMLConstants;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -16,8 +10,7 @@ import org.w3c.dom.NodeList;
 import parser.model.DomParserHelper;
 import parser.model.Model.Element;
 import parser.model.Model.Input;
-import parser.model.XMLErrorHandler;
-import constants.Paths;
+
 import constants.XMLLibProperties;
 
 public class ModellingElement
