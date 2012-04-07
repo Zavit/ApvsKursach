@@ -69,8 +69,9 @@ public class DescriptionParser
             int infoInput = Integer.parseInt(map.getNamedItem(XMLProperties.INFO_INPUT).getTextContent());
             int addressInput = Integer.parseInt(map.getNamedItem(XMLProperties.ADDRESS_INPUT).getTextContent());
             int controlInput = Integer.parseInt(map.getNamedItem(XMLProperties.CONTROL_INPUT).getTextContent());
+            int output = Integer.parseInt(map.getNamedItem(XMLProperties.OUTPUT).getTextContent());
             int delay = Integer.parseInt(map.getNamedItem(XMLProperties.DELAY).getTextContent());
-            listElement.add(new Element(function, type, new Input(infoInput, addressInput, controlInput), delay));
+            listElement.add(new Element(function, type, new Input(infoInput, addressInput, controlInput),output, delay));
         }
         //external
         NodeList ext_contacts = document.getElementsByTagName(XMLProperties.EXTERNAL_CONTACT);

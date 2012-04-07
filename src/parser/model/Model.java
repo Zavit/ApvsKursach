@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public  class Model
+public class Model
 {
     private List<Element>         listElements;
     private List<ExternalContact> listExtContacts;
@@ -48,13 +48,16 @@ public  class Model
         private String function;
         private String type;
         private Input  input;
+        private int    output;
         private int    delay;
+        private int    codedSignal;
 
-        public Element(String function, String type, Input input, int delay)
+        public Element(String function, String type, Input input, int output, int delay)
         {
             this.function = function;
             this.type = type;
             this.input = input;
+            this.output = output;
             this.delay = delay;
         }
 
@@ -76,6 +79,21 @@ public  class Model
         public Input getInput()
         {
             return input;
+        }
+
+        public int getOutput()
+        {
+            return output;
+        }
+
+        public void codeSignal(int data)
+        {
+            codedSignal = data;
+        }
+
+        public int getCodedSignal()
+        {
+            return codedSignal;
         }
     }
     public static class Input
@@ -110,6 +128,37 @@ public  class Model
         {
             return (infoInput + addressInput + controlInput);
         }
+
+        @Override
+        public int hashCode()
+        {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result + addressInput;
+            result = prime * result + controlInput;
+            result = prime * result + infoInput;
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object obj)
+        {
+            if (this == obj)
+                return true;
+            if (obj == null)
+                return false;
+            if (getClass() != obj.getClass())
+                return false;
+            Input other = (Input) obj;
+            if (addressInput != other.addressInput)
+                return false;
+            if (controlInput != other.controlInput)
+                return false;
+            if (infoInput != other.infoInput)
+                return false;
+            return true;
+        }
+        
     }
     public static class Contact
     {
