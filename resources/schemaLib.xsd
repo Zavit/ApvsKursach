@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:element name="Library">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="decoders" type="_decoders" minOccurs="1"
+					maxOccurs="1" />
+				<xs:element name="coders" type="_coders" minOccurs="1"
+					maxOccurs="1" />
+				<xs:element name="triggers" type="_triggers" minOccurs="1"
+					maxOccurs="1" />
+				<xs:element name="multiplexers" type="_multiplexers"
+					minOccurs="1" maxOccurs="1" />
+				<xs:element name="demultiplexers" type="_demultiplexers"
+					minOccurs="1" maxOccurs="1" />
+				<xs:element name="counters" type="_counters" minOccurs="1"
+					maxOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="_decoders">
+		<xs:sequence>
+			<xs:element name="decoder" type="element" minOccurs="1"
+				maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="_coders">
+		<xs:sequence>
+			<xs:element name="coder" type="element" minOccurs="1"
+				maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="_multiplexers">
+		<xs:sequence>
+			<xs:element name="multiplexer" type="element" minOccurs="1"
+				maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="_demultiplexers">
+		<xs:sequence>
+			<xs:element name="demultiplexer" type="element" minOccurs="1"
+				maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="_counters">
+		<xs:sequence>
+			<xs:element name="counter" type="element" minOccurs="1"
+				maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="_triggers">
+		<xs:sequence>
+			<xs:element name="RS" type="element" minOccurs="1"
+				maxOccurs="unbounded" />
+			<xs:element name="JK" type="element" minOccurs="1"
+				maxOccurs="unbounded" />
+			<xs:element name="T" type="element" minOccurs="1"
+				maxOccurs="unbounded" />
+			<xs:element name="D" type="element" minOccurs="1"
+				maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="element">
+		<xs:sequence>
+			<xs:element name="entry" type="_entry" minOccurs="1"
+				maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="controlInput" type="xs:int" use="required" />
+		<xs:attribute name="infoInput" type="xs:int" use="required" />
+		<xs:attribute name="addressInput" type="xs:int" use="required" />
+		<xs:attribute name="output" type="xs:int" use="required" />
+	</xs:complexType>
+	<xs:complexType name="_entry">
+		<xs:attribute name="key" type="xs:int" use="required" />
+		<xs:attribute name="value" type="xs:int" use="required" />
+	</xs:complexType>
+
+
+</xs:schema>

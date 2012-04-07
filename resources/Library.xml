@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Library>
+<Library xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="schemaLib.xsd">
 	<!-- DECODERS -->
 	<decoders>
 		<decoder controlInput="3" infoInput="3" addressInput="0"
@@ -64,16 +65,16 @@
 	<!-- TRIGGERS -->
 	<triggers>
 		<RS controlInput="3" infoInput="2" addressInput="0" output="2">
-
+		<entry key="109226" value="341" />
 		</RS>
 		<JK controlInput="3" infoInput="3" addressInput="0" output="2">
-
+		<entry key="109226" value="341" />
 		</JK>
 		<T controlInput="3" infoInput="2" addressInput="0" output="2">
-
+		<entry key="109226" value="341" />
 		</T>
 		<D controlInput="3" infoInput="2" addressInput="0" output="2">
-
+		<entry key="109226" value="341" />
 		</D>
 	</triggers>
 	<multiplexers>
