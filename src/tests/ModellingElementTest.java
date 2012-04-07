@@ -6,6 +6,8 @@ import modeling.ModellingElement;
 
 import org.junit.Test;
 
+import constants.Paths;
+
 import parser.model.Model.Element;
 import parser.model.Model.Input;
 
@@ -19,7 +21,7 @@ public class ModellingElementTest
         Element element = new Element("decoder", "dec", new Input(3, 0, 3), 8, 40);
         element.codeSignal(1041);
         ModellingElement mod = new ModellingElement(element);
-        assertTrue(expected == mod.runModellingOfElement());
+        assertTrue(expected == mod.runModellingOfElement(Paths.XML_LIBRARY_PATH,Paths.XML_LIBRARY_SCHEMA_PATH));
     }
 
 }

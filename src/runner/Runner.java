@@ -1,20 +1,26 @@
 package runner;
 
 import modeling.Modelling;
+import modeling.ModellingElement;
 import modeling.TactCalc;
 import parser.model.DescriptionParser;
-import parser.model.DescriptionParser.Model;
+import parser.model.Model;
+import parser.model.Model.Element;
+import parser.model.Model.Input;
 import constants.Paths;
 
 public class Runner
 {
     public static void main(String[] args) throws Exception
     {
-        Model model = DescriptionParser.parse(Paths.XML_PATH, Paths.XML_SCHEMA_PATH);
+        Model model = DescriptionParser.parse(Paths.XML_MODEL_PATH, Paths.XML_MODEL_SCHEMA_PATH);
 
-        int tact = TactCalc.tactCalc(model.getListElements());
+        // Modelling modelling = new Modelling(TactCalc.tactCalc(model.getListElements()), model);
+        //modelling.runModelling();
 
-        Modelling modelling = new Modelling(tact, model);
-        modelling.runModelling();
+        Element element = new Element("decoder", "dec", new Input(3, 0, 3), 8, 40);
+        element.codeSignal(1041);
+        ModellingElement mod = new ModellingElement(element);
+        System.out.println(mod.runModellingOfElement(Paths.XML_LIBRARY_PATH,Paths.XML_LIBRARY_SCHEMA_PATH));
     }
 }
