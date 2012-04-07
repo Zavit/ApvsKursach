@@ -129,6 +129,10 @@ public class DescriptionParser
         {
             return chain.getChainsCount();
         }
+        public int getExternalContactCount()
+        {
+            return listExtContacts.size()-1;
+        }
 
         public List<Element> getListElements()
         {
@@ -138,22 +142,6 @@ public class DescriptionParser
         public List<ExternalContact> getListExtContacts()
         {
             return listExtContacts;
-        }
-
-        @Override
-        public String toString()
-        {
-            StringBuilder builder = new StringBuilder();
-            builder.append(getClass().getName()).append("\n");
-            for (Element element : listElements)
-            {
-                builder.append(element).append("\n");
-            }
-            for (ExternalContact extContact : listExtContacts)
-            {
-                builder.append(extContact).append("\n");
-            }
-            return builder.append(chain).toString();
         }
     }
     public static class Element
@@ -209,12 +197,6 @@ public class DescriptionParser
         {
             return (infoInput + addressInput + controlInput);
         }
-
-        @Override
-        public String toString()
-        {
-            return getClass().getName() + "[function=" + function + ", type=" + type + ", infoInput=" + infoInput + ", addressInput=" + addressInput + ", controlInput=" + controlInput + ", delay="+delay+"]";
-        }
     }
     public static class Contact
     {
@@ -236,13 +218,6 @@ public class DescriptionParser
         {
             return numberContact;
         }
-
-        @Override
-        public String toString()
-        {
-            return getClass().getName() + "[type=" + type + "], [numberContact=" + numberContact + "]";
-        }
-
     }
     public static class ExternalContact extends Contact
     {
@@ -265,31 +240,18 @@ public class DescriptionParser
         {
             return chainNumber;
         }
-
-        @Override
-        public String toString()
-        {
-            return super.toString() + ",[chainNumber = " + chainNumber + "]" + ",[value = " + value + "]";
-        }
     }
     public static class ElementContact extends Contact
     {
         private int numberElement;
-
         private ElementContact(String type, int numberContact, int numberElement)
         {
             super(type, numberContact);
             this.numberElement = numberElement;
-        }
-
+       }
         public int getElementNumber()
         {
             return numberElement;
-        }
-
-        public String toString()
-        {
-            return super.toString() + ",[numberElement =" + numberElement + "]";
         }
     }
     public static class Chain
@@ -306,7 +268,7 @@ public class DescriptionParser
             mapChains.put(number, contact);
         }
 
-        private int getChainsCount()
+        public int getChainsCount()
         {
             return mapChains.size();
         }
@@ -314,18 +276,6 @@ public class DescriptionParser
         public List<ElementContact> getListContacts(int chain)
         {
             return Collections.unmodifiableList(mapChains.get(chain));
-        }
-
-        @Override
-        public String toString()
-        {
-            StringBuilder builder = new StringBuilder();
-            builder.append(getClass().getName()).append("\n");
-            for (Entry<Integer, List<ElementContact>> entry : mapChains.entrySet())
-            {
-                builder.append(entry.getKey()).append("=").append(entry.getValue()).append("\n");
-            }
-            return builder.toString();
         }
     }
     private static class XMLErrorHandler extends DefaultHandler
