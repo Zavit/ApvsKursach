@@ -7,7 +7,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
@@ -125,6 +124,10 @@ public class DescriptionParser
         public Chain getChain()
         {
             return chain;
+        }
+        public int getChainCount()
+        {
+            return chain.getChainsCount();
         }
 
         public List<Element> getListElements()
