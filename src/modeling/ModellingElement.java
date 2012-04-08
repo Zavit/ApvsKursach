@@ -11,6 +11,7 @@ import parser.model.DomParserHelper;
 import parser.model.Model.Element;
 import parser.model.Model.Input;
 
+import constants.Paths;
 import constants.XMLLibProperties;
 
 public class ModellingElement
@@ -22,11 +23,11 @@ public class ModellingElement
         this.element = element;
     }
 
-    public int runModellingOfElement(String libXml,
-                                     String libXmlSchema)
+    public int runModellingOfElement()
     {
         int codedsignal = element.getCodedSignal();
-        Document document = DomParserHelper.parse(libXml, libXmlSchema);
+        DomParserHelper helper = new DomParserHelper();
+        Document document = helper.parse(Paths.XML_LIBRARY_PATH, Paths.XML_LIBRARY_SCHEMA_PATH);
         if(document == null)
         {
             return -1;

@@ -16,15 +16,16 @@ import parser.model.Model.ElementContact;
 import parser.model.Model.ExternalContact;
 import parser.model.Model.Input;
 
+import constants.Paths;
 import constants.XMLProperties;
 
 public class DescriptionParser
 {
 
-    public static Model parse(String xmlFile,
-                              String xmlSchema) throws Exception
+    public static Model parse() throws Exception
     {
-        Document description = DomParserHelper.parse(xmlFile, xmlSchema);
+        DomParserHelper helper = new DomParserHelper();
+        Document description = helper.parse(Paths.XML_MODEL_PATH, Paths.XML_MODEL_SCHEMA_PATH);
         return description == null ? null : formModel(description);
     }
 

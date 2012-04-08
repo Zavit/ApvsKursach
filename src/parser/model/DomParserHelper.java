@@ -12,7 +12,9 @@ import org.w3c.dom.Document;
 
 public class DomParserHelper
 {
-    public static Document parse(String xmlFile,
+   XMLErrorHandler error = null;
+  
+    public  Document parse(String xmlFile,
                                  String xmlSchema)
     {
         Document document = null;
@@ -26,7 +28,7 @@ public class DomParserHelper
             factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
 
             DocumentBuilder parser = factory.newDocumentBuilder();
-            XMLErrorHandler error = new XMLErrorHandler();
+            error = new XMLErrorHandler();
 
             parser.setErrorHandler(error);
             document = parser.parse(new File(xmlFile));
@@ -38,8 +40,11 @@ public class DomParserHelper
         catch (Exception e)
         {
             e.printStackTrace();
-            return null;
         }
         return document;
+    }
+    public XMLErrorHandler getError()
+    {
+        return error;
     }
 }
