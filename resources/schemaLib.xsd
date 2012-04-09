@@ -4,6 +4,8 @@
 	<xs:element name="Library">
 		<xs:complexType>
 			<xs:sequence>
+				<xs:element name="logics" type="_logics" minOccurs="1"
+					maxOccurs="1" />
 				<xs:element name="decoders" type="_decoders" minOccurs="1"
 					maxOccurs="1" />
 				<xs:element name="coders" type="_coders" minOccurs="1"
@@ -19,6 +21,20 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
+
+	<xs:complexType name="_logics">
+		<xs:sequence>
+
+			<xs:element name="conjunction" type="logic_element"
+				minOccurs="1" maxOccurs="unbounded" />
+			<xs:element name="conjunction_invers" type="logic_element"
+				minOccurs="1" maxOccurs="unbounded" />
+			<xs:element name="disjunction" type="logic_element"
+				minOccurs="1" maxOccurs="unbounded" />
+			<xs:element name="disjunction_invers" type="logic_element"
+				minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
 
 	<xs:complexType name="_decoders">
 		<xs:sequence>
@@ -78,6 +94,12 @@
 		<xs:attribute name="key" type="xs:int" use="required" />
 		<xs:attribute name="value" type="xs:int" use="required" />
 	</xs:complexType>
-
+	
+	<xs:complexType name="logic_element">
+		<xs:attribute name="controlInput" type="xs:int" use="required" />
+		<xs:attribute name="infoInput" type="xs:int" use="required" />
+		<xs:attribute name="addressInput" type="xs:int" use="required" />
+		<xs:attribute name="output" type="xs:int" use="required" />
+	</xs:complexType>
 
 </xs:schema>

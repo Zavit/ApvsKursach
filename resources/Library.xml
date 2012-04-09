@@ -2,79 +2,114 @@
 <Library xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="schemaLib.xsd">
 	<!-- DECODERS -->
+	<logics>
+		<conjunction controlInput="2" infoInput="0" addressInput="0"
+			output="1" />
+		<conjunction controlInput="3" infoInput="0" addressInput="0"
+			output="1" />
+		<conjunction controlInput="4" infoInput="0" addressInput="0"
+			output="1" />
+		<conjunction controlInput="8" infoInput="0" addressInput="0"
+			output="1" />
+		<conjunction_invers controlInput="2" infoInput="0"
+			addressInput="0" output="1" />
+		<conjunction_invers controlInput="3" infoInput="0"
+			addressInput="0" output="1" />
+		<conjunction_invers controlInput="4" infoInput="0"
+			addressInput="0" output="1" />
+		<conjunction_invers controlInput="8" infoInput="0"
+			addressInput="0" output="1" />
+		<!-- - -->
+		<disjunction controlInput="2" infoInput="0" addressInput="0"
+			output="1" />
+		<disjunction controlInput="3" infoInput="0" addressInput="0"
+			output="1" />
+		<disjunction controlInput="4" infoInput="0" addressInput="0"
+			output="1" />
+		<disjunction controlInput="8" infoInput="0" addressInput="0"
+			output="1" />
+		<disjunction_invers controlInput="2" infoInput="0"
+			addressInput="0" output="1" />
+		<disjunction_invers controlInput="3" infoInput="0"
+			addressInput="0" output="1" />
+		<disjunction_invers controlInput="4" infoInput="0"
+			addressInput="0" output="1" />
+		<disjunction_invers controlInput="8" infoInput="0"
+			addressInput="0" output="1" />
+	</logics>
 	<decoders>
 		<decoder controlInput="3" infoInput="3" addressInput="0"
 			output="8">
-				<entry key="682" value="21845" />
-				<entry key="2474" value="21845" />
-				<entry key="2666" value="21845" />
-				<entry key="1024" value="5461" />
-				<entry key="1040" value="17749" />
-				<entry key="1024" value="20821" />
-				<entry key="1044" value="21589" />
-				<entry key="1025" value="21781" />
-				<entry key="1041" value="21829" />
-				<entry key="1029" value="21841" />
-				<entry key="1045" value="21844" />
+			<entry key="682" value="21845" />
+			<entry key="2474" value="21845" />
+			<entry key="2666" value="21845" />
+			<entry key="1024" value="5461" />
+			<entry key="1040" value="17749" />
+			<entry key="1024" value="20821" />
+			<entry key="1044" value="21589" />
+			<entry key="1025" value="21781" />
+			<entry key="1041" value="21829" />
+			<entry key="1029" value="21841" />
+			<entry key="1045" value="21844" />
 		</decoder>
 		<decoder controlInput="1" infoInput="2" addressInput="0"
 			output="4">
-				<entry key="31" value="85" />
-				<entry key="0" value="21" />
-				<entry key="1" value="69" />
-				<entry key="4" value="81" />
-				<entry key="5" value="84" />
+			<entry key="31" value="85" />
+			<entry key="0" value="21" />
+			<entry key="1" value="69" />
+			<entry key="4" value="81" />
+			<entry key="5" value="84" />
 		</decoder>
 		<decoder controlInput="2" infoInput="4" addressInput="0"
 			output="16">
-				<entry key="1706" value="1431655765" />
-				<entry key="2474" value="1431655765" />
-				<entry key="0" value="357913941" />
-				<entry key="1" value="1163220309" />
-				<entry key="4" value="1364546901" />
-				<entry key="5" value="1414878549" />
-				<entry key="16" value="1427461461" />
-				<entry key="17" value="1430607189" />
-				<entry key="20" value="1431393621" />
-				<entry key="21" value="1431590229" />
-				<entry key="64" value="1431639381" />
-				<entry key="65" value="1431651669" />
-				<entry key="68" value="1431654741" />
-				<entry key="69" value="1431655509" />
-				<entry key="80" value="1431655701" />
-				<entry key="81" value="1431655749" />
-				<entry key="84" value="1431655761" />
-				<entry key="85" value="1431655764" />
+			<entry key="1706" value="1431655765" />
+			<entry key="2474" value="1431655765" />
+			<entry key="0" value="357913941" />
+			<entry key="1" value="1163220309" />
+			<entry key="4" value="1364546901" />
+			<entry key="5" value="1414878549" />
+			<entry key="16" value="1427461461" />
+			<entry key="17" value="1430607189" />
+			<entry key="20" value="1431393621" />
+			<entry key="21" value="1431590229" />
+			<entry key="64" value="1431639381" />
+			<entry key="65" value="1431651669" />
+			<entry key="68" value="1431654741" />
+			<entry key="69" value="1431655509" />
+			<entry key="80" value="1431655701" />
+			<entry key="81" value="1431655749" />
+			<entry key="84" value="1431655761" />
+			<entry key="85" value="1431655764" />
 		</decoder>
 	</decoders>
 	<!-- CODERS -->
 	<coders>
 		<coder controlInput="3" infoInput="9" addressInput="0" output="5">
-				<entry key="109226" value="341" />
-				<entry key="21845" value="340" />
-				<entry key="174752" value="1" />
-				<entry key="174724" value="5" />
-				<entry key="174612" value="17" />
-				<entry key="174164" value="21" />
-				<entry key="172372" value="65" />
-				<entry key="165204" value="69" />
-				<entry key="136532" value="81" />
-				<entry key="21844" value="85" />
+			<entry key="109226" value="341" />
+			<entry key="21845" value="340" />
+			<entry key="174752" value="1" />
+			<entry key="174724" value="5" />
+			<entry key="174612" value="17" />
+			<entry key="174164" value="21" />
+			<entry key="172372" value="65" />
+			<entry key="165204" value="69" />
+			<entry key="136532" value="81" />
+			<entry key="21844" value="85" />
 		</coder>
 	</coders>
 	<!-- TRIGGERS -->
 	<triggers>
 		<RS controlInput="3" infoInput="2" addressInput="0" output="2">
-		<entry key="109226" value="341" />
+			<entry key="109226" value="341" />
 		</RS>
 		<JK controlInput="3" infoInput="3" addressInput="0" output="2">
-		<entry key="109226" value="341" />
+			<entry key="109226" value="341" />
 		</JK>
 		<T controlInput="3" infoInput="2" addressInput="0" output="2">
-		<entry key="109226" value="341" />
+			<entry key="109226" value="341" />
 		</T>
 		<D controlInput="3" infoInput="2" addressInput="0" output="2">
-		<entry key="109226" value="341" />
+			<entry key="109226" value="341" />
 		</D>
 	</triggers>
 	<multiplexers>
