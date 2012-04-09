@@ -15,10 +15,7 @@ public class Runner
     {
         Model model = DescriptionParser.parse();
 
-        // Modelling modelling = new Modelling(TactCalc.tactCalc(model.getListElements()), model);
-        //modelling.runModelling();
-
-        Element element = new Element("decoder", "dec", new Input(3, 0, 3), 8, 40);
+        Element element = new Element("decoder", new Input(3, 0, 3), 8, 40);
         element.codeSignal(1041);
         ModellingElement mod = new ModellingElement(element);
         System.out.println(mod.runModellingOfElement());

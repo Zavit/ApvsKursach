@@ -46,16 +46,14 @@ public class Model
     public static class Element
     {
         private String function;
-        private String type;
         private Input  input;
         private int    output;
         private int    delay;
         private int    codedSignal;
 
-        public Element(String function, String type, Input input, int output, int delay)
+        public Element(String function, Input input, int output, int delay)
         {
             this.function = function;
-            this.type = type;
             this.input = input;
             this.output = output;
             this.delay = delay;
@@ -64,11 +62,6 @@ public class Model
         public String getFunction()
         {
             return function;
-        }
-
-        public String getType()
-        {
-            return type;
         }
 
         public int getDelay()
@@ -158,7 +151,7 @@ public class Model
                 return false;
             return true;
         }
-        
+
     }
     public static class Contact
     {

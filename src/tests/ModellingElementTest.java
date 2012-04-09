@@ -18,7 +18,7 @@ public class ModellingElementTest
     public void testModelling()
     {
         int expected = 21829;
-        Element element = new Element("decoder", "dec", new Input(3, 0, 3), 8, 40);
+        Element element = new Element( "dec", new Input(3, 0, 3), 8, 40);
         element.codeSignal(1041);
         ModellingElement mod = new ModellingElement(element);
         assertTrue(expected == mod.runModellingOfElement());

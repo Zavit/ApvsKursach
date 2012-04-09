@@ -38,14 +38,13 @@ public class DescriptionParser
         {
             Node element = elements.item(i);
             NamedNodeMap map = element.getAttributes();
-            String type = map.getNamedItem(XMLProperties.TYPE).getTextContent();
             String function = map.getNamedItem(XMLProperties.FUNCTION).getTextContent();
             int infoInput = Integer.parseInt(map.getNamedItem(XMLProperties.INFO_INPUT).getTextContent());
             int addressInput = Integer.parseInt(map.getNamedItem(XMLProperties.ADDRESS_INPUT).getTextContent());
             int controlInput = Integer.parseInt(map.getNamedItem(XMLProperties.CONTROL_INPUT).getTextContent());
             int output = Integer.parseInt(map.getNamedItem(XMLProperties.OUTPUT).getTextContent());
             int delay = Integer.parseInt(map.getNamedItem(XMLProperties.DELAY).getTextContent());
-            listElement.add(new Element(function, type, new Input(infoInput, addressInput, controlInput), output, delay));
+            listElement.add(new Element(function, new Input(infoInput, addressInput, controlInput), output, delay));
         }
         //external
         NodeList ext_contacts = document.getElementsByTagName(XMLProperties.EXTERNAL_CONTACT);
