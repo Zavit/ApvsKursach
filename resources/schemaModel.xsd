@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
 	<xs:element name="model">
@@ -22,7 +22,6 @@
 	</xs:complexType>
 	<!-- ELEMENT -->
 	<xs:complexType name="_element">
-		<xs:attribute name="type" type="xs:string" use="required" />
 		<xs:attribute name="function" type="xs:string" use="required" />
 		<xs:attribute name="infoInput" type="xs:int" use="required" />
 		<xs:attribute name="addressInput" type="xs:int" use="required" />
