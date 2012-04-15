@@ -3,38 +3,38 @@
 	xsi:noNamespaceSchemaLocation="schemaLib.xsd">
 	<!-- DECODERS -->
 	<logics>
-		<conjunction controlInput="2" infoInput="0" addressInput="0"
+		<conjunction controlInput="0" infoInput="2" addressInput="0"
+			output="1"/>
+		<conjunction controlInput="0" infoInput="3" addressInput="0"
+			output="1"/>
+		<conjunction controlInput="0" infoInput="4" addressInput="0"
+			output="1"/>
+		<conjunction controlInput="0" infoInput="8" addressInput="0"
 			output="1" />
-		<conjunction controlInput="3" infoInput="0" addressInput="0"
-			output="1" />
-		<conjunction controlInput="4" infoInput="0" addressInput="0"
-			output="1" />
-		<conjunction controlInput="8" infoInput="0" addressInput="0"
-			output="1" />
-		<conjunction_invers controlInput="2" infoInput="0"
+		<conjunction_invers controlInput="0" infoInput="2"
 			addressInput="0" output="1" />
-		<conjunction_invers controlInput="3" infoInput="0"
+		<conjunction_invers controlInput="0" infoInput="3"
 			addressInput="0" output="1" />
-		<conjunction_invers controlInput="4" infoInput="0"
+		<conjunction_invers controlInput="0" infoInput="4"
 			addressInput="0" output="1" />
-		<conjunction_invers controlInput="8" infoInput="0"
+		<conjunction_invers controlInput="0" infoInput="8"
 			addressInput="0" output="1" />
 		<!-- - -->
-		<disjunction controlInput="2" infoInput="0" addressInput="0"
+		<disjunction controlInput="0" infoInput="2" addressInput="0"
 			output="1" />
-		<disjunction controlInput="3" infoInput="0" addressInput="0"
+		<disjunction controlInput="0" infoInput="3" addressInput="0"
 			output="1" />
-		<disjunction controlInput="4" infoInput="0" addressInput="0"
+		<disjunction controlInput="0" infoInput="4" addressInput="0"
 			output="1" />
-		<disjunction controlInput="8" infoInput="0" addressInput="0"
+		<disjunction controlInput="0" infoInput="8" addressInput="0"
 			output="1" />
-		<disjunction_invers controlInput="2" infoInput="0"
+		<disjunction_invers controlInput="0" infoInput="2"
 			addressInput="0" output="1" />
-		<disjunction_invers controlInput="3" infoInput="0"
+		<disjunction_invers controlInput="0" infoInput="3"
 			addressInput="0" output="1" />
-		<disjunction_invers controlInput="4" infoInput="0"
+		<disjunction_invers controlInput="0" infoInput="4"
 			addressInput="0" output="1" />
-		<disjunction_invers controlInput="8" infoInput="0"
+		<disjunction_invers controlInput="0" infoInput="8"
 			addressInput="0" output="1" />
 	</logics>
 	<decoders>
@@ -84,7 +84,7 @@
 	</decoders>
 	<!-- CODERS -->
 	<coders>
-		<coder controlInput="3" infoInput="9" addressInput="0" output="5">
+		<coder controlInput="1" infoInput="8" addressInput="0" output="5">
 			<entry key="109226" value="341" />
 			<entry key="21845" value="340" />
 			<entry key="174752" value="1" />
