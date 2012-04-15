@@ -66,12 +66,5 @@
 		<xs:attribute name="numberElement" type="xs:int" use="required" />
 		<xs:attribute name="numberContact" type="xs:int" use="required" />
 	</xs:complexType>
-	<xs:element name="intValue">
-		<xs:simpleType>
-			<xs:restriction base="xs:int">
-				<xs:minInclusive value="0" />
-				<xs:maxInclusive value="10000" />
-			</xs:restriction>
-		</xs:simpleType>
-	</xs:element>
+
 </xs:schema>
