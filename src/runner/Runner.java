@@ -15,8 +15,8 @@ public class Runner
     {
         Model model = DescriptionParser.parse();
 
-        Element element = new Element("decoder", new Input(3, 0, 3), 8, 40);
-        element.codeSignal(1041);
+        Element element = new Element("disjunction", new Input(2,0, 0), 1, 25);
+        element.codeSignal(9);
         ModellingElement mod = new ModellingElement(element);
         System.out.println(mod.runModellingOfElement());
     }
