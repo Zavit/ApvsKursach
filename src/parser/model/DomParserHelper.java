@@ -10,12 +10,15 @@ import javax.xml.validation.SchemaFactory;
 
 import org.w3c.dom.Document;
 
+import parser.model.XMLErrorHandler.ErrorHandler;
+
 public class DomParserHelper
 {
-   XMLErrorHandler error = null;
-  
-    public  Document parse(String xmlFile,
-                                 String xmlSchema)
+    private XMLErrorHandler errorHandler  = null;
+    private ErrorHandler           error = null;
+
+    public Document parse(String xmlFile,
+                          String xmlSchema)
     {
         Document document = null;
         try
@@ -28,23 +31,46 @@ public class DomParserHelper
             factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
 
             DocumentBuilder parser = factory.newDocumentBuilder();
-            error = new XMLErrorHandler();
+            errorHandler = new XMLErrorHandler();
 
-            parser.setErrorHandler(error);
+            parser.setErrorHandler(errorHandler);
             document = parser.parse(new File(xmlFile));
-            if (error.getSaxParseException() != null)
+            if (errorHandler.getSaxParseException() != null)
             {
                 return null;
             }
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            error = new ErrorHandler(e.getMessage());
+            return null;
         }
         return document;
     }
-    public XMLErrorHandler getError()
+
+    public XMLErrorHandler getErrorHandler()
+    {
+        return errorHandler;
+    }
+
+    public ErrorHandler getErrors()
     {
         return error;
     }
+    @Override
+    public String toString()
+    {
+        if(error != null)
+        {
+            return error.toString();
+        }
+        else if(errorHandler !=null)
+        {
+            return errorHandler.toString();
+        }
+        return "NONE MISTAKES";
+            
+        
+    } 
+    
 }

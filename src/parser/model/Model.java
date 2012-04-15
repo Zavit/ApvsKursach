@@ -88,6 +88,11 @@ public class Model
         {
             return codedSignal;
         }
+        @Override
+        public String toString()
+        {
+          return "with function - ["+function+"] inputs - ["+input+"] outputs - ["+output+"] delay - ["+delay+"] ";
+        }
     }
     public static class Input
     {
@@ -151,7 +156,11 @@ public class Model
                 return false;
             return true;
         }
-
+@Override
+public String toString()
+{
+    return "AddressInput - "+addressInput+" InfoInput - "+infoInput+" controlInput - "+controlInput;
+}
     }
     public static class Contact
     {

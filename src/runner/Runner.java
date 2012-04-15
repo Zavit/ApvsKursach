@@ -1,6 +1,5 @@
 package runner;
 
-
 import modeling.ModellingElement;
 
 import parser.model.DescriptionParser;
@@ -13,11 +12,30 @@ public class Runner
 {
     public static void main(String[] args) throws Exception
     {
-        Model model = DescriptionParser.parse();
+        DescriptionParser parser = new DescriptionParser();
+        Model model = parser.parse();
+        if (model == null)
+        {
+            System.out.println(parser.getHelper());
 
-        Element element = new Element("disjunction", new Input(2,0, 0), 1, 25);
-        element.codeSignal(9);
+        }
+        Element element = new Element("disjunction", new Input(2, 0, 0), 1, 25);
+        element.codeSignal(10);
         ModellingElement mod = new ModellingElement(element);
-        System.out.println(mod.runModellingOfElement());
+        int result = mod.runModellingOfElement();
+        if (result == -1)
+        {
+            System.out.println(mod.getHelper());
+
+        }
+        else if (result == -2)
+        {
+            System.out.println(mod.getLogicErr());
+        }
+        else
+        {
+            System.out.println(result);
+
+        }
     }
 }

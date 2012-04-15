@@ -1,7 +1,5 @@
 package parser.model;
 
-
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,15 +19,25 @@ import constants.XMLProperties;
 
 public class DescriptionParser
 {
+    private DomParserHelper helper = new DomParserHelper();
 
-    public static Model parse() throws Exception
+    public DescriptionParser()
     {
-        DomParserHelper helper = new DomParserHelper();
-        Document description = helper.parse(Paths.XML_MODEL_PATH, Paths.XML_MODEL_SCHEMA_PATH);
-        return description == null ? null : formModel(description);
+
     }
 
-    private static Model formModel(Document document)
+    public Model parse() throws Exception
+    {   
+        Document description = helper.parse(Paths.XML_MODEL_PATH, Paths.XML_MODEL_SCHEMA_PATH);
+        return (description == null) ? null : formModel(description);
+    }
+
+    public DomParserHelper getHelper()
+    {
+        return helper;
+    }
+
+    private Model formModel(Document document)
     {
         //elements
         NodeList elements = document.getElementsByTagName(XMLProperties.ELEMENT);

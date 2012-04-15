@@ -15,7 +15,9 @@ import constants.XMLLibProperties;
 
 public class ModellingElement
 {
-    private Element element;
+    private Element         element;
+    private DomParserHelper helper   = new DomParserHelper();
+    private LogicError      logicErr = null;
 
     public ModellingElement(Element element)
     {
@@ -25,7 +27,7 @@ public class ModellingElement
     public int runModellingOfElement()
     {
         int codedsignal = element.getCodedSignal();
-        DomParserHelper helper = new DomParserHelper();
+
         Document document = helper.parse(Paths.XML_LIBRARY_PATH, Paths.XML_LIBRARY_SCHEMA_PATH);
         if (document == null)
         {
@@ -40,7 +42,7 @@ public class ModellingElement
                 Node node = nodes.item(i);
                 NamedNodeMap attr = node.getAttributes();
 
-                if (element.getInput().equals(getInputByAttr(attr)))
+                if (element.getInput().equals(getInputByAttr(attr)) && element.getOutput() == Integer.parseInt(attr.getNamedItem(XMLLibProperties.OUTPUT).getTextContent()))
                 {
                     if (function.equals(Logics.CONJUNCTION) || function.equals(Logics.CONJUNCTION_INVERS) || function.equals(Logics.DISJUNCTION) || function.equals(Logics.DISJUNCTION_INVERS))
                     {
@@ -66,10 +68,14 @@ public class ModellingElement
         catch (Exception e)
         {
             e.printStackTrace();
-            return -2;
         }
+        logicErr = new LogicError(element);
+        return -2;
+    }
 
-        return -1;
+    public LogicError getLogicErr()
+    {
+        return logicErr;
     }
 
     public Input getInputByAttr(NamedNodeMap attr) throws Exception
@@ -78,6 +84,11 @@ public class ModellingElement
         int addressInput = Integer.parseInt(attr.getNamedItem(XMLLibProperties.ADDRESS_INPUT).getTextContent());
         int controlInput = Integer.parseInt(attr.getNamedItem(XMLLibProperties.CONTROL_INPUT).getTextContent());
         return new Input(infoInput, addressInput, controlInput);
+    }
+
+    public DomParserHelper getHelper()
+    {
+        return helper;
     }
 
     private static class Logic
@@ -94,46 +105,61 @@ public class ModellingElement
         }
 
         private int getOutputSignal()
-        {      
+        {
             if (function.equals(Logics.CONJUNCTION) || function.equals(Logics.CONJUNCTION_INVERS))
             {
-               for(int mask=3,i=0;i<input.getInfoInput();mask<<=2,i++)
-               {
-                   if((mask&inputSignal) == 0)
-                   {
-                       return function.equals(Logics.CONJUNCTION)?0:1;
-                   }
-               }
-               for(int mask=2,i=0;i<input.getInfoInput();mask<<=2,i++)
-               {
-                   if((mask&inputSignal)!=0)
-                   {
-                       return 2;
-                   }
-               }
-               return function.equals(Logics.CONJUNCTION)?1:0;
-            }
-            else if (function.equals(Logics.DISJUNCTION) || function.equals(Logics.DISJUNCTION_INVERS))
-            {
-                for(int mask=1,i=0;i<input.getInfoInput();mask<<=2,i++)
+                for (int mask = 3, i = 0; i < input.getInfoInput(); mask <<= 2, i++)
                 {
-                    if((mask&inputSignal) == 1)
+                    if ((mask & inputSignal) == 0)
                     {
-                        return function.equals(Logics.DISJUNCTION)?1:0;
+                        return function.equals(Logics.CONJUNCTION) ? 0 : 1;
                     }
                 }
-                for(int mask=2,i=0;i<input.getInfoInput();mask<<=2,i++)
+                for (int mask = 2, i = 0; i < input.getInfoInput(); mask <<= 2, i++)
                 {
-                    if((mask&inputSignal)!=0)
+                    if ((mask & inputSignal) != 0)
                     {
                         return 2;
                     }
                 }
-                return function.equals(Logics.DISJUNCTION)?0:1;
+                return function.equals(Logics.CONJUNCTION) ? 1 : 0;
+            }
+            else if (function.equals(Logics.DISJUNCTION) || function.equals(Logics.DISJUNCTION_INVERS))
+            {
+                for (int mask = 1, i = 0; i < input.getInfoInput(); mask <<= 2, i++)
+                {
+                    if ((mask & inputSignal) == 1)
+                    {
+                        return function.equals(Logics.DISJUNCTION) ? 1 : 0;
+                    }
+                }
+                for (int mask = 2, i = 0; i < input.getInfoInput(); mask <<= 2, i++)
+                {
+                    if ((mask & inputSignal) != 0)
+                    {
+                        return 2;
+                    }
+                }
+                return function.equals(Logics.DISJUNCTION) ? 0 : 1;
             }
             return -1;
         }
 
+    }
+    public static class LogicError
+    {
+        private Element element;
+
+        private LogicError(Element element)
+        {
+            this.element = element;
+        }
+
+        @Override
+        public String toString()
+        {
+            return element == null ? "NOTHING" : "The element " + element+ " wasn't found in library!!";
+        }
     }
 
 }
