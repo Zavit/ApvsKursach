@@ -4,11 +4,11 @@
 	<!-- DECODERS -->
 	<logics>
 		<conjunction controlInput="0" infoInput="2" addressInput="0"
-			output="1"/>
+			output="1" />
 		<conjunction controlInput="0" infoInput="3" addressInput="0"
-			output="1"/>
+			output="1" />
 		<conjunction controlInput="0" infoInput="4" addressInput="0"
-			output="1"/>
+			output="1" />
 		<conjunction controlInput="0" infoInput="8" addressInput="0"
 			output="1" />
 		<conjunction_invers controlInput="0" infoInput="2"
@@ -99,18 +99,86 @@
 	</coders>
 	<!-- TRIGGERS -->
 	<triggers>
-		<RS controlInput="3" infoInput="2" addressInput="0" output="2">
-			<entry key="109226" value="341" />
-		</RS>
-		<JK controlInput="3" infoInput="3" addressInput="0" output="2">
-			<entry key="109226" value="341" />
-		</JK>
-		<T controlInput="3" infoInput="2" addressInput="0" output="2">
-			<entry key="109226" value="341" />
-		</T>
-		<D controlInput="3" infoInput="2" addressInput="0" output="2">
-			<entry key="109226" value="341" />
-		</D>
+		<triggerRS controlInput="0" infoInput="2" addressInput="0"
+			output="2">
+			<entry key="0" currentState="0" nextState="0" value="1" />
+			<entry key="0" currentState="1" nextState="1" value="4" />
+			<entry key="0" currentState="2" nextState="2" value="10" />
+			<entry key="1" currentState="0" nextState="1" value="4" />
+			<entry key="1" currentState="1" nextState="1" value="4" />
+			<entry key="1" currentState="2" nextState="1" value="4" />
+			<entry key="2" currentState="0" nextState="2" value="10" />
+			<entry key="2" currentState="1" nextState="1" value="4" />
+			<entry key="2" currentState="2" nextState="2" value="10" />
+			<entry key="4" currentState="0" nextState="0" value="1" />
+			<entry key="4" currentState="1" nextState="0" value="1" />
+			<entry key="4" currentState="2" nextState="0" value="1" />
+			<entry key="8" currentState="0" nextState="0" value="1" />
+			<entry key="8" currentState="1" nextState="2" value="10" />
+			<entry key="8" currentState="2" nextState="2" value="10" />
+			<entry key="5" currentState="0" nextState="2" value="10" />
+			<entry key="5" currentState="1" nextState="2" value="10" />
+			<entry key="5" currentState="2" nextState="2" value="10" />
+			<entry key="6" currentState="0" nextState="2" value="10" />
+			<entry key="6" currentState="1" nextState="2" value="10" />
+			<entry key="6" currentState="2" nextState="2" value="10" />
+			<entry key="9" currentState="0" nextState="2" value="10" />
+			<entry key="9" currentState="1" nextState="2" value="10" />
+			<entry key="9" currentState="2" nextState="2" value="10" />
+			<entry key="10" currentState="2" nextState="2" value="10" />
+		</triggerRS>
+		<triggerJK controlInput="1" infoInput="2" addressInput="0"
+			output="2">
+			<entry key="0" currentState="0" nextState="0" value="1" />
+			<entry key="0" currentState="1" nextState="1" value="4" />
+			<entry key="0" currentState="2" nextState="2" value="10" />
+			<entry key="1" currentState="0" nextState="0" value="1" />
+			<entry key="1" currentState="1" nextState="0" value="1" />
+			<entry key="1" currentState="2" nextState="0" value="1" />
+			<entry key="2" currentState="0" nextState="0" value="1" />
+			<entry key="2" currentState="1" nextState="0" value="1" />
+			<entry key="2" currentState="2" nextState="0" value="1" />
+			<entry key="4" currentState="0" nextState="1" value="4" />
+			<entry key="4" currentState="1" nextState="1" value="4" />
+			<entry key="4" currentState="2" nextState="1" value="4" />
+			<entry key="8" currentState="0" nextState="2" value="10" />
+			<entry key="8" currentState="1" nextState="2" value="10" />
+			<entry key="8" currentState="2" nextState="2" value="10" />
+			<entry key="5" currentState="0" nextState="1" value="4" />
+			<entry key="5" currentState="1" nextState="0" value="1" />
+			<entry key="5" currentState="2" nextState="2" value="10" />
+			<entry key="6" currentState="0" nextState="2" value="10" />
+			<entry key="6" currentState="1" nextState="2" value="10" />
+			<entry key="6" currentState="2" nextState="2" value="10" />
+			<entry key="9" currentState="0" nextState="2" value="10" />
+			<entry key="9" currentState="1" nextState="2" value="10" />
+			<entry key="9" currentState="2" nextState="2" value="10" />
+			<entry key="10" currentState="2" nextState="2" value="10" />
+		</triggerJK>
+		<triggerT controlInput="1" infoInput="1" addressInput="0"
+			output="2">
+			<entry key="0" currentState="0" nextState="0" value="1" />
+			<entry key="0" currentState="1" nextState="1" value="4" />
+			<entry key="0" currentState="2" nextState="2" value="10" />
+			<entry key="1" currentState="0" nextState="1" value="4" />
+			<entry key="1" currentState="1" nextState="0" value="1" />
+			<entry key="1" currentState="2" nextState="2" value="10" />
+			<entry key="2" currentState="0" nextState="2" value="10" />
+			<entry key="2" currentState="1" nextState="2" value="10" />
+			<entry key="2" currentState="2" nextState="2" value="10" />
+		</triggerT>
+		<triggerD controlInput="1" infoInput="1" addressInput="0"
+			output="2">
+			<entry key="0" currentState="0" nextState="0" value="0" />
+			<entry key="0" currentState="1" nextState="1" value="0" />
+			<entry key="0" currentState="2" nextState="2" value="0" />
+			<entry key="1" currentState="0" nextState="0" value="4" />
+			<entry key="1" currentState="1" nextState="1" value="4" />
+			<entry key="1" currentState="2" nextState="2" value="4" />
+			<entry key="2" currentState="0" nextState="0" value="10" />
+			<entry key="2" currentState="1" nextState="1" value="10" />
+			<entry key="2" currentState="2" nextState="2" value="10" />
+		</triggerD>
 	</triggers>
 	<multiplexers>
 		<!-- MUXES -->

@@ -69,13 +69,13 @@
 	</xs:complexType>
 	<xs:complexType name="_triggers">
 		<xs:sequence>
-			<xs:element name="RS" type="element" minOccurs="1"
+			<xs:element name="triggerRS" type="element" minOccurs="1"
 				maxOccurs="unbounded" />
-			<xs:element name="JK" type="element" minOccurs="1"
+			<xs:element name="triggerJK" type="element" minOccurs="1"
 				maxOccurs="unbounded" />
-			<xs:element name="T" type="element" minOccurs="1"
+			<xs:element name="triggerT" type="element" minOccurs="1"
 				maxOccurs="unbounded" />
-			<xs:element name="D" type="element" minOccurs="1"
+			<xs:element name="triggerD" type="element" minOccurs="1"
 				maxOccurs="unbounded" />
 		</xs:sequence>
 	</xs:complexType>
@@ -93,8 +93,10 @@
 	<xs:complexType name="_entry">
 		<xs:attribute name="key" type="xs:int" use="required" />
 		<xs:attribute name="value" type="xs:int" use="required" />
+		<xs:attribute name="currentState" type="xs:int" use="optional" />
+		<xs:attribute name="nextState" type="xs:int" use="optional" />
 	</xs:complexType>
-	
+
 	<xs:complexType name="logic_element">
 		<xs:attribute name="controlInput" type="xs:int" use="required" />
 		<xs:attribute name="infoInput" type="xs:int" use="required" />
