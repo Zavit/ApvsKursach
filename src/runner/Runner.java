@@ -14,28 +14,30 @@ public class Runner
     {
         DescriptionParser parser = new DescriptionParser();
         Model model = parser.parse();
+        System.out.println(model);
         if (model == null)
         {
             System.out.println(parser.getHelper());
 
         }
-        Element element = new Element("disjunction", new Input(2, 0, 0), 1, 25);
-        element.codeSignal(10);
+        Element element = new Element("triggerRS", new Input(2, 0, 0), 2, 25);
+        element.codeSignal(1);
         ModellingElement mod = new ModellingElement(element);
         int result = mod.runModellingOfElement();
-        if (result == -1)
-        {
-            System.out.println(mod.getHelper());
-
-        }
-        else if (result == -2)
-        {
-            System.out.println(mod.getLogicErr());
-        }
-        else
-        {
-            System.out.println(result);
-
-        }
+System.out.println(result);
+        //        if (result == -1)
+//        {
+//            System.out.println(mod.getHelper());
+//
+//        }
+//        else if (result == -2)
+//        {
+//            System.out.println(mod.getLogicErr());
+//        }
+//        else
+//        {
+//            System.out.println(result);
+//
+//        }
     }
 }
