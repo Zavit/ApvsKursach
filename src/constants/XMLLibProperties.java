@@ -8,4 +8,6 @@ public interface XMLLibProperties
     String OUTPUT        = "output";
     String KEY           = "key";
     String VALUE         = "value";
+    String CURRENT_STATE = "currentState";
+    String NEXT_STATE    = "nextState";
 }
